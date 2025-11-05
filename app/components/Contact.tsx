@@ -35,7 +35,7 @@ export default function Contact() {
                     <h4 className="font-bold text-[#af5f36] mb-1">Address</h4>
                     <p className="text-gray-600">
                       Sree Narayana Public School<br />
-                      Chathannoor, Kollam District<br />
+                      Chathannoor – Vilappuram, Kollam District<br />
                       Kerala, India - 691572
                     </p>
                   </div>

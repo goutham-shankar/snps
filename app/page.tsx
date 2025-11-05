@@ -19,7 +19,7 @@ export default function Home() {
     },
     {
       title: "World-Class Infrastructure",
-      description: "13-acre campus featuring modern laboratories, sports facilities, smart classrooms, and eco-friendly spaces",
+      description: "14-acre campus featuring modern laboratories, sports facilities, smart classrooms, and eco-friendly spaces",
       icon: (
         <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -98,7 +98,7 @@ export default function Home() {
 
   const stats = [
     { number: "2015", label: "Year Established" },
-    { number: "13", label: "Acres Campus" },
+    { number: "14", label: "Acres Campus" },
     { number: "500+", label: "Students Enrolled" },
     { number: "100%", label: "Board Results" }
   ];
@@ -563,10 +563,10 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-3">Expansive Campus</h3>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Spread across <span className="font-semibold text-[#af5f36]">13 acres</span> of lush greenery 
+                Spread across <span className="font-semibold text-[#af5f36]">14 acres</span> of lush greenery 
                 with cutting-edge infrastructure and eco-friendly facilities.
               </p>
-              <div className="text-4xl font-bold text-[#af5f36]">13 Acres</div>
+              <div className="text-4xl font-bold text-[#af5f36]">14 Acres</div>
               <div className="text-sm text-gray-500">Green Campus</div>
             </div>
           </div>

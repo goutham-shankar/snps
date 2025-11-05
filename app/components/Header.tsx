@@ -83,7 +83,7 @@ export default function Header() {
                 </h1>
                 <p className={`transition-all duration-300 text-xs md:text-sm ${
                   isTransparentMode ? 'text-gray-200' : 'text-gray-600'
-                }`}>Chathannoor | CBSE Affiliated</p>
+                }`}>Chathannoor – Vilappuram | CBSE Affiliated</p>
               </div>
             </Link>
           </div>

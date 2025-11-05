@@ -1,8 +1,44 @@
+import schoolInfo from '../data/school-info';
+
 export default function About() {
   return (
     <section id="about" className="py-16 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4 max-w-7xl">
-        {/* Sophisticated hero with integrated image */}
+        {/* Welcome Message Section */}
+        <div className="bg-white rounded-3xl shadow-lg overflow-hidden mb-12 md:mb-16">
+          <div className="p-8 md:p-12 lg:p-16 text-center">
+            <div className="inline-flex items-center gap-2 mb-6 justify-center">
+              <div className="w-1 h-8 bg-[#af5f36] rounded-full"></div>
+              <span className="text-sm font-semibold tracking-wider uppercase text-[#af5f36]">
+                Welcome Message
+              </span>
+            </div>
+            
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
+              {schoolInfo.welcomeMessage.title}
+            </h1>
+            
+            <div className="inline-block mb-6">
+              <span className="bg-[#af5f36] text-white px-6 py-3 rounded-full text-lg font-semibold italic">
+                "{schoolInfo.motto}"
+              </span>
+            </div>
+            
+            <div className="max-w-5xl mx-auto text-gray-700 leading-relaxed space-y-4">
+              {schoolInfo.welcomeMessage.content.split('\n\n').map((paragraph, index) => (
+                <p key={index} className="text-lg">{paragraph}</p>
+              ))}
+            </div>
+            
+            <div className="mt-8 text-center">
+              <p className="text-xl font-semibold text-[#af5f36] italic">
+                {schoolInfo.tagline}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Principal's Message */}
         <div className="bg-white rounded-3xl shadow-lg overflow-hidden mb-12 md:mb-16">
           <div className="grid lg:grid-cols-5 gap-0">
             {/* Content side */}
@@ -10,26 +46,30 @@ export default function About() {
               <div className="inline-flex items-center gap-2 mb-6">
                 <div className="w-1 h-8 bg-[#af5f36] rounded-full"></div>
                 <span className="text-sm font-semibold tracking-wider uppercase text-[#af5f36]">
-                  About Us
+                  Principal's Message
                 </span>
               </div>
               
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-5">
-                Shaping Minds,<br />
-                Building Futures
-              </h1>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-4">
+                {schoolInfo.principal.name}
+              </h2>
               
-              <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-6">
-                Since <strong className="text-[#af5f36] font-semibold">2015</strong>, 
-                Sree Narayana Public School has been nurturing young minds with 
-                value-based CBSE education in Chathannoor, Kerala.
+              <p className="text-lg text-[#af5f36] font-semibold mb-6">
+                {schoolInfo.principal.designation}
               </p>
+              
+              <div className="text-gray-700 leading-relaxed space-y-4">
+                {schoolInfo.principalMessage.content.split('\n\n').map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
 
-              <div className="flex flex-wrap gap-3 mb-8">
+              <div className="flex flex-wrap gap-3 mt-8 mb-8">
                 {[
                   { label: "CBSE Affiliated", icon: "✓" },
-                  { label: "13 Acre Campus", icon: "🌳" },
-                  { label: "Pre-KG to Grade XII", icon: "📚" }
+                  { label: `${schoolInfo.campusSize} Campus`, icon: "🌳" },
+                  { label: schoolInfo.grades, icon: "📚" },
+                  { label: schoolInfo.specialStatus, icon: "🏆" }
                 ].map((item, i) => (
                   <div 
                     key={i}
@@ -81,10 +121,10 @@ export default function About() {
         {/* Stats bar - elegant design */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
           {[
-            { value: "1000+", label: "Students", sublabel: "Active Learners" },
-            { value: "60+", label: "Faculty", sublabel: "Expert Teachers" },
-            { value: "100%", label: "Results", sublabel: "Board Pass Rate" },
-            { value: "10+", label: "Years", sublabel: "Of Excellence" }
+            { value: "2015", label: "Established", sublabel: "Years of Excellence" },
+            { value: schoolInfo.campusSize, label: "Campus", sublabel: "Eco-friendly Environment" },
+            { value: "CBSE", label: "Affiliated", sublabel: "National Board" },
+            { value: "NEP 2020", label: "Aligned", sublabel: "Modern Curriculum" }
           ].map((stat, i) => (
             <div 
               key={i}
@@ -95,60 +135,6 @@ export default function About() {
               <div className="text-xs text-gray-500">{stat.sublabel}</div>
             </div>
           ))}
-        </div>
-
-        {/* Our Story - refined two-column */}
-        <div className="bg-white rounded-3xl shadow-lg p-8 md:p-12 mb-12 md:mb-16">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
-            <div>
-              <div className="inline-flex items-center gap-2 mb-5">
-                <div className="w-1 h-6 bg-[#af5f36] rounded-full"></div>
-                <span className="text-sm font-semibold tracking-wider uppercase text-[#af5f36]">
-                  Our Story
-                </span>
-              </div>
-              
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-5">
-                A Legacy of Educational Excellence
-              </h2>
-              
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Established under the aegis of the <strong className="font-semibold text-gray-900">Sree Narayana Educational Society</strong>, 
-                SNPS stands as a beacon of quality education in Chathannoor, Kerala.
-              </p>
-              
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Affiliated with <strong className="font-semibold text-gray-900">CBSE, New Delhi</strong>, 
-                we offer comprehensive education that seamlessly blends traditional values with modern pedagogical approaches.
-              </p>
-
-              <p className="text-gray-700 leading-relaxed">
-                Our 13-acre eco-friendly campus provides a nurturing environment where students develop 
-                academically, socially, and emotionally to become responsible global citizens.
-              </p>
-            </div>
-
-            <div className="space-y-5">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Why Choose SNPS?</h3>
-              
-              {[
-                { title: "Holistic Development", desc: "Balanced focus on academics, sports, arts, and character building" },
-                { title: "Modern Infrastructure", desc: "Smart classrooms, well-equipped labs, and extensive sports facilities" },
-                { title: "Experienced Faculty", desc: "Dedicated teachers committed to student success and well-being" },
-                { title: "Safe Environment", desc: "Secure, eco-friendly campus with comprehensive safety measures" }
-              ].map((item, i) => (
-                <div key={i} className="flex gap-4 p-4 rounded-xl border border-gray-100 hover:border-orange-200 hover:bg-orange-50/30 transition">
-                  <div className="shrink-0 w-10 h-10 rounded-lg bg-[#af5f36] text-white flex items-center justify-center font-bold">
-                    {i + 1}
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">{item.title}</h4>
-                    <p className="text-sm text-gray-600">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Vision & Mission - elegant cards with design elements */}
@@ -162,7 +148,7 @@ export default function About() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                 </svg>
               ),
-              content: "To develop confident, value-driven individuals equipped with critical thinking, life skills, and a deep sense of national pride, who contribute positively to society and the nation."
+              content: "To nurture enlightened individuals — minds that think with clarity, hearts that feel with compassion and spirits that act with integrity, shaping illuminated intellects and responsible citizens of a harmonious world."
             },
             {
               title: "Our Mission",
@@ -171,7 +157,7 @@ export default function About() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                 </svg>
               ),
-              content: "To provide holistic, competency-based education rooted in values, leadership, and discipline through a safe, inclusive environment that fosters academic excellence, creativity, and responsible citizenship."
+              content: "To provide holistic, competency-based education rooted in values, leadership, and discipline through experiential learning aligned with NEP 2020, fostering academic excellence, creativity, and responsible citizenship."
             }
           ].map((item, i) => (
             <div 
@@ -201,40 +187,19 @@ export default function About() {
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Core Values</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              The principles that guide every decision we make and every action we take
+              The principles that guide every decision we make and every action we take, aligned with NEP 2020
             </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { 
-                title: "Excellence", 
-                desc: "Pursuing the highest standards in academics and character",
-                icon: "⭐"
-              },
-              { 
-                title: "Integrity", 
-                desc: "Building character through honesty and ethical conduct",
-                icon: "🛡️"
-              },
-              { 
-                title: "Compassion", 
-                desc: "Nurturing empathy and respect for all",
-                icon: "❤️"
-              },
-              { 
-                title: "Innovation", 
-                desc: "Embracing creativity and modern approaches",
-                icon: "💡"
-              }
-            ].map((value, i) => (
+            {schoolInfo.coreValues.map((value, i) => (
               <div 
                 key={i}
                 className="text-center p-6 rounded-2xl border border-gray-100 hover:border-orange-200 hover:bg-orange-50/30 transition group"
               >
                 <div className="text-4xl mb-4 group-hover:scale-110 transition">{value.icon}</div>
                 <h4 className="text-lg font-bold text-gray-900 mb-2">{value.title}</h4>
-                <p className="text-sm text-gray-600">{value.desc}</p>
+                <p className="text-sm text-gray-600">{value.description}</p>
               </div>
             ))}
           </div>
@@ -288,7 +253,7 @@ export default function About() {
             <div className="md:col-span-2">
               <h3 className="text-2xl md:text-3xl font-bold mb-3">Ready to Join Our Community?</h3>
               <p className="text-orange-100 text-lg">
-                Visit our campus and discover how SNPS can shape your child's future.
+                Visit our campus and discover how SNPS can shape your child's future with enlightenment through education.
               </p>
             </div>
             <div className="flex md:justify-end">
@@ -308,6 +273,3 @@ export default function About() {
     </section>
   );
 }
-
-
-
