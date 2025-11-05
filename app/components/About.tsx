@@ -66,8 +66,8 @@ export default function About() {
             {/* Image side - properly sized and blended */}
             <div className="lg:col-span-2 relative min-h-80 lg:min-h-[500px]">
               <img
-                src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200&auto=format&fit=crop"
-                alt="SNPS Campus"
+                src="/SCHOOL.JPG"
+                alt="Sree Narayana Public School Campus"
                 className="absolute inset-0 w-full h-full object-cover"
                 loading="eager"
                 decoding="async"
