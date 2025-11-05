@@ -16,8 +16,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Sree Narayana Public School, Chathannoor | CBSE Affiliated | NEP 2020 Aligned",
-  description: "Sree Narayana Public School (SNPS), Chathannoor is a CBSE-affiliated institution (est. 2015) offering education from Pre-KG to Grade XII. The school upholds governance transparency, value-based education, and academic excellence, aligned with CBSE Affiliation Bye-Laws and NEP 2020.",
+  title: "Sree Narayana Public School, Chathannoor – Vilappuram | CBSE Affiliated | NEP 2020 Aligned | Proposed New Sainik School",
+  description: "Sree Narayana Public School (SNPS), Chathannoor – Vilappuram is a CBSE-affiliated institution (est. 2015) offering education from Pre-KG to Grade XII on a 14-acre campus. Enlightenment through Education. Proposed New Sainik School with NEP 2020 alignment.",
   keywords: [
     "Sree Narayana Public School Chathannoor",
     "CBSE Affiliation Bye-Laws",
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
     apple: '/logo.png',
   },
   openGraph: {
-    title: "Sree Narayana Public School, Chathannoor",
-    description: "CBSE Affiliated | NEP 2020 Aligned | Governance Transparency",
+    title: "Sree Narayana Public School, Chathannoor – Vilappuram",
+    description: "CBSE Affiliated | NEP 2020 Aligned | Proposed New Sainik School | Enlightenment through Education",
     type: "website",
     images: ['/logo.png'],
   },

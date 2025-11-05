@@ -2,14 +2,14 @@
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Grievance from '../components/Grievance';
+import Management from '../components/Management';
 
-export default function GrievancePage() {
+export default function ManagementPage() {
   return (
     <div className="min-h-screen">
       <Header />
-      <div className="pt-20 md:pt-24">
-        <Grievance />
+      <div className="pt-20">
+        <Management />
       </div>
       <Footer />
     </div>
