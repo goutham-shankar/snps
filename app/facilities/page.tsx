@@ -8,7 +8,7 @@ export default function FacilitiesPage() {
   return (
     <div className="min-h-screen">
       <Header />
-      <div className="pt-20">
+      <div className="pt-20 md:pt-24">
         <Facilities />
       </div>
       <Footer />

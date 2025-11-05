@@ -8,7 +8,7 @@ export default function AcademicsPage() {
   return (
     <div className="min-h-screen">
       <Header />
-      <div className="pt-24">
+      <div className="pt-20 md:pt-10">
         <Academics />
       </div>
       <Footer />

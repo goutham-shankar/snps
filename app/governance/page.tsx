@@ -6,9 +6,9 @@ export default function Governance() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-20">
+      <main className="pt-20 md:pt-24">
         <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 max-w-7xl">
             <h1 className="text-4xl md:text-5xl font-bold text-[#af5f36] text-center">Governance & School Management</h1>
             <div className="w-24 h-1 bg-orange-500 mx-auto mt-4" />
             <p className="text-gray-600 text-center mt-6 max-w-3xl mx-auto">Transparent governance with accountability: School Management Committee (SMC), PTA, and statutory compliance.</p>

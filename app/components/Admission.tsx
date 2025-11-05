@@ -54,16 +54,16 @@ export default function Admission() {
     <section id="admission" className="py-16 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-12 md:mb-16">
-          <div className="inline-block mb-6">
-            <span className="bg-[#af5f36] text-white px-6 py-3 rounded-full text-sm font-bold animate-pulse">
+          <div className="flex flex-col items-center gap-4 mb-6">
+            <span className="bg-[#af5f36] text-white px-6 py-3 rounded-full text-sm font-bold animate-pulse inline-block">
               🎓 Admissions Open for 2025-26
             </span>
-          </div>
-          <div className="inline-flex items-center gap-2 mb-4 justify-center">
-            <div className="w-1 h-6 bg-[#af5f36] rounded-full"></div>
-            <span className="text-sm font-semibold tracking-wider uppercase text-[#af5f36]">
-              Admissions
-            </span>
+            <div className="inline-flex items-center gap-2">
+              <div className="w-1 h-6 bg-[#af5f36] rounded-full"></div>
+              <span className="text-sm font-semibold tracking-wider uppercase text-[#af5f36]">
+                Admissions
+              </span>
+            </div>
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             Admission Process

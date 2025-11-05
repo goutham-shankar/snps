@@ -133,7 +133,15 @@ export default function Footer() {
               © {currentYear} Sree Narayana Public School. All rights reserved.
             </p>
             <p className="text-gray-500">
-              Designed with ❤️ for Excellence in Education
+              Designed and developed by{' '}
+              <a 
+                href="https://www.obsidyne.com/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#af5f36] hover:text-[#8b4a28] transition-colors underline"
+              >
+                Obsidyne
+              </a>
             </p>
           </div>
         </div>

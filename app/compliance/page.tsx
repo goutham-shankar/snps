@@ -34,9 +34,9 @@ export default function Compliance() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-20">
+      <main className="pt-20 md:pt-10">
         <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 max-w-7xl">
             <div className="text-center mb-12">
               <h1 className="text-4xl md:text-5xl font-bold text-[#af5f36]">Compliance & Transparency</h1>
               <div className="w-24 h-1 bg-orange-500 mx-auto mt-4" />
