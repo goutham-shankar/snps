@@ -55,15 +55,15 @@ export default function Management() {
 
             {/* Principal Level */}
             <div className="text-center mb-8">
-              <div className="inline-block bg-white border-2 border-[#af5f36] rounded-lg p-6 shadow-md">
-                <div className="w-16 h-16 bg-[#af5f36] rounded-full mx-auto mb-3 flex items-center justify-center text-white">
+              <div className="inline-block bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-lg p-6 shadow-lg text-white">
+                <div className="w-16 h-16 bg-white/20 rounded-full mx-auto mb-3 flex items-center justify-center text-white">
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                 </div>
-                <h3 className="font-bold text-gray-900 text-lg">{schoolInfo.principal.name}</h3>
-                <p className="text-[#af5f36] font-semibold">{schoolInfo.principal.title}</p>
-                <p className="text-gray-600 text-sm">{schoolInfo.specialStatus}</p>
+                <h3 className="font-bold text-lg">{schoolInfo.principal.name}</h3>
+                <p className="text-orange-200 font-semibold">{schoolInfo.principal.title}</p>
+                <p className="text-orange-100 text-sm">{schoolInfo.specialStatus}</p>
               </div>
             </div>
 
@@ -149,33 +149,33 @@ export default function Management() {
 
         {/* Faculty Directory */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-12">
-          <div className="bg-gray-50 border-b border-gray-200 p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Faculty Directory</h2>
-            <p className="text-gray-600">Our dedicated teaching professionals</p>
+          <div className="bg-gradient-to-r from-[#af5f36] to-[#8b4a28] p-6 text-white">
+            <h2 className="text-2xl font-bold mb-2">Faculty Directory</h2>
+            <p className="text-orange-100">Our dedicated teaching professionals</p>
             
             {/* Faculty Statistics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-[#af5f36]">{schoolInfo.faculty.length}</div>
-                <div className="text-sm text-gray-600">Total Faculty</div>
+              <div className="bg-white/20 border border-white/30 rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-white">{schoolInfo.faculty.length}</div>
+                <div className="text-sm text-orange-100">Total Faculty</div>
               </div>
-              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-[#af5f36]">
+              <div className="bg-white/20 border border-white/30 rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-white">
                   {schoolInfo.faculty.filter(f => f.qualification.includes('M.A.') || f.qualification.includes('M.Sc.') || f.qualification.includes('MCA')).length}
                 </div>
-                <div className="text-sm text-gray-600">Post Graduates</div>
+                <div className="text-sm text-orange-100">Post Graduates</div>
               </div>
-              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-[#af5f36]">
+              <div className="bg-white/20 border border-white/30 rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-white">
                   {schoolInfo.faculty.filter(f => f.qualification.includes('B.Ed.')).length}
                 </div>
-                <div className="text-sm text-gray-600">B.Ed. Qualified</div>
+                <div className="text-sm text-orange-100">B.Ed. Qualified</div>
               </div>
-              <div className="bg-white border border-gray-200 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-[#af5f36]">
+              <div className="bg-white/20 border border-white/30 rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-white">
                   {schoolInfo.faculty.filter(f => f.qualification.includes('KTET') || f.qualification.includes('SET') || f.qualification.includes('NET')).length}
                 </div>
-                <div className="text-sm text-gray-600">Certified</div>
+                <div className="text-sm text-orange-100">Certified</div>
               </div>
             </div>
           </div>
