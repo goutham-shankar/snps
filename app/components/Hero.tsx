@@ -15,7 +15,7 @@ export default function Hero() {
         "https://plus.unsplash.com/premium_photo-1664299825291-909568eb8db7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
     },
     {
-      title: "13 Acres of Eco-Friendly Campus",
+      title: "14 Acres of Eco-Friendly Campus",
       subtitle: "A Safe and Inspiring Learning Environment",
   imageUrl: "https://images.pexels.com/photos/159844/cellular-education-classroom-159844.jpeg",
     },
@@ -98,7 +98,7 @@ export default function Hero() {
           {/* Stats */}
           <div className="mt-8 sm:mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 px-4">
             <div className="text-center">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1 sm:mb-2">13</div>
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1 sm:mb-2">14</div>
               <div className="text-xs sm:text-sm text-gray-200">Acres Campus</div>
             </div>
             <div className="text-center">

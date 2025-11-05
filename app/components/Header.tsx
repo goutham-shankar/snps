@@ -30,12 +30,26 @@ export default function Header() {
 
   const menuItems = [
     { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
+    { 
+      label: 'About', 
+      href: '/about',
+      dropdown: [
+        { label: 'About Us', href: '/about' },
+        { label: 'Management', href: '/management' }
+      ]
+    },
     { label: 'Academics', href: '/academics' },
     { label: 'Admission', href: '/admission' },
     { label: 'Facilities', href: '/facilities' },
     { label: 'Gallery', href: '/gallery' },
-    { label: 'Contact', href: '/contact' },
+    { 
+      label: 'Contact', 
+      href: '/contact',
+      dropdown: [
+        { label: 'Contact Us', href: '/contact' },
+        { label: 'Feedback & Complaints', href: '/grievance' }
+      ]
+    },
   ];
 
   // Check if link is active
@@ -83,7 +97,7 @@ export default function Header() {
                 </h1>
                 <p className={`transition-all duration-300 text-xs md:text-sm ${
                   isTransparentMode ? 'text-gray-200' : 'text-gray-600'
-                }`}>Chathannoor | CBSE Affiliated</p>
+                }`}>Chathannoor – Vilappuram | CBSE Affiliated</p>
               </div>
             </Link>
           </div>
@@ -92,6 +106,49 @@ export default function Header() {
           <nav className="hidden lg:flex items-center gap-1">
             {menuItems.map((item) => {
               const active = isActive(item.href);
+              
+              if (item.dropdown) {
+                return (
+                  <div key={item.label} className="relative group">
+                    <Link
+                      href={item.href}
+                      className={`px-4 py-2 rounded-lg transition-all duration-200 font-medium text-sm relative flex items-center gap-1 ${
+                        isTransparentMode 
+                          ? active
+                            ? 'text-white bg-white/30 font-semibold'
+                            : 'text-white hover:text-white hover:bg-white/20'
+                          : active
+                            ? 'text-[#af5f36] bg-orange-100 font-semibold'
+                            : 'text-gray-700 hover:text-[#af5f36] hover:bg-orange-50'
+                      }`}
+                    >
+                      {item.label}
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                      {active && (
+                        <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-0.5 ${
+                          isTransparentMode ? 'bg-white' : 'bg-[#af5f36]'
+                        }`} />
+                      )}
+                    </Link>
+                    
+                    {/* Dropdown Menu */}
+                    <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                      {item.dropdown.map((dropdownItem) => (
+                        <Link
+                          key={dropdownItem.label}
+                          href={dropdownItem.href}
+                          className="block px-4 py-3 text-gray-700 hover:text-[#af5f36] hover:bg-orange-50 transition-colors first:rounded-t-lg last:rounded-b-lg"
+                        >
+                          {dropdownItem.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+              
               return (
                 <Link
                   key={item.label}
@@ -161,6 +218,37 @@ export default function Header() {
             <nav className="flex flex-col gap-2">
               {menuItems.map((item) => {
                 const active = isActive(item.href);
+                
+                if (item.dropdown) {
+                  return (
+                    <div key={item.label}>
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`px-4 py-3 rounded-lg transition-all duration-200 font-medium ${
+                          active
+                            ? 'text-[#af5f36] bg-orange-100 font-semibold'
+                            : 'text-gray-700 hover:text-[#af5f36] hover:bg-orange-50'
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                      <div className="ml-4 mt-1 space-y-1">
+                        {item.dropdown.map((dropdownItem) => (
+                          <Link
+                            key={dropdownItem.label}
+                            href={dropdownItem.href}
+                            onClick={() => setIsMenuOpen(false)}
+                            className="block px-4 py-2 text-sm text-gray-600 hover:text-[#af5f36] hover:bg-orange-50 rounded-lg transition-colors"
+                          >
+                            {dropdownItem.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
+                
                 return (
                   <Link
                     key={item.label}

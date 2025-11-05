@@ -41,11 +41,11 @@ export default function Footer() {
             </div>
             <div className="text-left">
               <h3 className="font-bold text-2xl text-white mb-1">Sree Narayana Public School</h3>
-              <p className="text-sm text-gray-400">Chathannoor | CBSE Affiliated</p>
+              <p className="text-sm text-gray-400">Chathannoor – Vilappuram | CBSE Affiliated</p>
             </div>
           </Link>
           <p className="text-gray-400 text-lg leading-relaxed italic max-w-3xl mx-auto">
-            &quot;Empowering minds, nurturing values, and shaping future leaders on our 13-acre campus since 2015.&quot;
+            &quot;Empowering minds, nurturing values, and shaping future leaders on our 14-acre campus since 2015. Enlightenment through Education.&quot;
           </p>
         </div>
 
@@ -107,7 +107,7 @@ export default function Footer() {
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
-                <span>Chathannoor, Kollam, Kerala</span>
+                <span>Chathannoor – Vilappuram, Kollam, Kerala</span>
               </li>
               <li className="flex items-start gap-3 text-gray-400">
                 <svg className="w-5 h-5 mt-0.5 text-[#af5f36] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
