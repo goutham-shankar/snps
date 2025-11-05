@@ -33,44 +33,40 @@ export default function Admission() {
       title: "Inquiry", 
       desc: "Submit online form or visit campus", 
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
-      ),
-      color: "from-blue-500 to-blue-600"
+      )
     },
     { 
       step: 2, 
       title: "Registration", 
       desc: "Fill registration form with documents", 
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
         </svg>
-      ),
-      color: "from-green-500 to-green-600"
+      )
     },
     { 
       step: 3, 
       title: "Interaction", 
       desc: "Student & parent interaction", 
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
         </svg>
-      ),
-      color: "from-purple-500 to-purple-600"
+      )
     },
     { 
       step: 4, 
       title: "Admission", 
       desc: "Fee payment & enrollment", 
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-      ),
-      color: "from-[#af5f36] to-[#8b4a28]"
+      )
     }
   ];
 
@@ -106,14 +102,14 @@ export default function Admission() {
           </p>
         </div>
 
-        {/* Admission Steps - Redesigned */}
+        {/* Admission Steps - Professional Design */}
         <div className="relative mb-16">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-6">
             {admissionSteps.map((item, index) => (
               <div key={index} className="relative">
-                <div className="bg-white rounded-2xl shadow-lg p-8 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                <div className="bg-white border border-gray-200 rounded-lg p-6 text-center hover:shadow-md transition-shadow">
                   {/* Step Number */}
-                  <div className={`w-16 h-16 bg-gradient-to-br ${item.color} rounded-full flex items-center justify-center mx-auto mb-4 text-white text-xl font-bold shadow-lg`}>
+                  <div className="w-12 h-12 bg-[#af5f36] rounded-full flex items-center justify-center mx-auto mb-4 text-white text-lg font-bold">
                     {item.step}
                   </div>
                   
@@ -122,15 +118,15 @@ export default function Admission() {
                     {item.icon}
                   </div>
                   
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3">{item.title}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">{item.desc}</p>
                 </div>
                 
-                {/* Improved Arrow */}
+                {/* Professional Arrow */}
                 {index < admissionSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
-                    <div className="w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center border-2 border-[#af5f36]">
-                      <svg className="w-4 h-4 text-[#af5f36]" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
+                    <div className="w-6 h-6 bg-white border-2 border-[#af5f36] rounded-full flex items-center justify-center">
+                      <svg className="w-3 h-3 text-[#af5f36]" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                       </svg>
                     </div>
@@ -142,11 +138,11 @@ export default function Admission() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Application Form - Redesigned */}
-          <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
-            <div className="bg-gradient-to-r from-[#af5f36] to-[#8b4a28] p-8 text-white">
-              <h3 className="text-2xl font-bold mb-2">Admission Inquiry Form</h3>
-              <p className="text-orange-100">Start your journey with us today</p>
+          {/* Application Form - Professional Design */}
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
+            <div className="bg-gray-100 border-b border-gray-200 p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Admission Inquiry Form</h3>
+              <p className="text-gray-600">Start your journey with us today</p>
             </div>
             
             <div className="p-8">
@@ -159,7 +155,7 @@ export default function Admission() {
                     value={formData.studentName}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#af5f36] focus:ring-4 focus:ring-orange-100 outline-none transition-all duration-300 text-gray-800 placeholder-gray-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-[#af5f36] focus:ring-2 focus:ring-[#af5f36]/20 outline-none transition-all text-gray-800 placeholder-gray-500"
                     placeholder="Enter student's full name"
                   />
                 </div>
@@ -212,7 +208,7 @@ export default function Admission() {
                     value={formData.parentName}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#af5f36] focus:ring-4 focus:ring-orange-100 outline-none transition-all duration-300 text-gray-800 placeholder-gray-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-[#af5f36] focus:ring-2 focus:ring-[#af5f36]/20 outline-none transition-all text-gray-800 placeholder-gray-500"
                     placeholder="Enter parent/guardian name"
                   />
                 </div>
@@ -226,7 +222,7 @@ export default function Admission() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#af5f36] focus:ring-4 focus:ring-orange-100 outline-none transition-all duration-300 text-gray-800 placeholder-gray-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-[#af5f36] focus:ring-2 focus:ring-[#af5f36]/20 outline-none transition-all text-gray-800 placeholder-gray-500"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -238,7 +234,7 @@ export default function Admission() {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#af5f36] focus:ring-4 focus:ring-orange-100 outline-none transition-all duration-300 text-gray-800 placeholder-gray-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-[#af5f36] focus:ring-2 focus:ring-[#af5f36]/20 outline-none transition-all text-gray-800 placeholder-gray-500"
                       placeholder="+91 98765 43210"
                     />
                   </div>
@@ -251,14 +247,14 @@ export default function Admission() {
                     value={formData.address}
                     onChange={handleChange}
                     rows={3}
-                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#af5f36] focus:ring-4 focus:ring-orange-100 outline-none transition-all duration-300 resize-none text-gray-800 placeholder-gray-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-[#af5f36] focus:ring-2 focus:ring-[#af5f36]/20 outline-none transition-all resize-none text-gray-800 placeholder-gray-500"
                     placeholder="Enter your complete address"
                   />
                 </div>
                 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-[#af5f36] to-[#8b4a28] text-white py-4 px-6 rounded-xl font-bold text-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+                  className="w-full bg-[#af5f36] hover:bg-[#8b4a28] text-white py-4 px-6 rounded-lg font-bold text-lg transition-colors"
                 >
                   Submit Inquiry
                 </button>
@@ -287,49 +283,49 @@ export default function Admission() {
             </div>
 
             {/* Contact Information */}
-            <div className="bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-3xl shadow-lg p-8 text-white">
-              <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-gray-100 border border-gray-200 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                <svg className="w-6 h-6 text-[#af5f36]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 Get in Touch
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-orange-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-[#af5f36]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                   <div>
-                    <div className="text-orange-100">Admission Office</div>
-                    <div className="text-orange-100">{schoolInfo.contact.phone.admission}</div>
+                    <div className="text-gray-600 text-sm">Admission Office</div>
+                    <div className="font-semibold text-gray-900">{schoolInfo.contact.phone.admission}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <svg className="w-5 h-5 text-orange-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-[#af5f36]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                   <div>
-                    <div className="text-orange-100">Email</div>
-                    <div className="text-orange-100">{schoolInfo.contact.email.admissions}</div>
+                    <div className="text-gray-600 text-sm">Email</div>
+                    <div className="font-semibold text-gray-900">{schoolInfo.contact.email.admissions}</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-orange-200 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-[#af5f36] mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                   <div>
-                    <div className="text-orange-100">Visit Us</div>
-                    <div className="text-orange-100 text-sm">{schoolInfo.contact.address.full}</div>
+                    <div className="text-gray-600 text-sm">Visit Us</div>
+                    <div className="font-semibold text-gray-900 text-sm">{schoolInfo.contact.address.full}</div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Office Hours */}
-            <div className="bg-white rounded-3xl shadow-lg p-8">
-              <h3 className="text-2xl font-bold text-[#af5f36] mb-6 flex items-center gap-3">
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-white border border-gray-200 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                <svg className="w-6 h-6 text-[#af5f36]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 Office Hours
@@ -345,7 +341,7 @@ export default function Admission() {
                 </div>
                 <div className="flex justify-between">
                   <span>Sunday</span>
-                  <span className="font-semibold text-red-500">{schoolInfo.contact.officeHours.sunday}</span>
+                  <span className="font-semibold text-gray-500">{schoolInfo.contact.officeHours.sunday}</span>
                 </div>
               </div>
             </div>

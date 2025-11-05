@@ -110,6 +110,9 @@ export default function About() {
                   Welcome Message
                 </span>
               </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                {schoolInfo.welcomeMessage.title}
+              </h2>
               <div className="inline-block mb-6">
                 <span className="bg-[#af5f36] text-white px-6 py-3 rounded-full text-lg font-semibold italic">
                   "{schoolInfo.motto}"

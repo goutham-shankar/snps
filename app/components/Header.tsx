@@ -42,8 +42,14 @@ export default function Header() {
     { label: 'Admission', href: '/admission' },
     { label: 'Facilities', href: '/facilities' },
     { label: 'Gallery', href: '/gallery' },
-    { label: 'Grievance', href: '/grievance' },
-    { label: 'Contact', href: '/contact' },
+    { 
+      label: 'Contact', 
+      href: '/contact',
+      dropdown: [
+        { label: 'Contact Us', href: '/contact' },
+        { label: 'Feedback & Complaints', href: '/grievance' }
+      ]
+    },
   ];
 
   // Check if link is active
