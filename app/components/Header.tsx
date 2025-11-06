@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileDropdowns, setMobileDropdowns] = useState<Record<string, boolean>>({});
   const pathname = usePathname();
   const isHomePage = pathname === '/';
 
@@ -26,7 +27,15 @@ export default function Header() {
   // Close mobile menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
+    setMobileDropdowns({});
   }, [pathname]);
+
+  const toggleMobileDropdown = (label: string) => {
+    setMobileDropdowns(prev => ({
+      ...prev,
+      [label]: !prev[label]
+    }));
+  };
 
   const menuItems = [
     { label: 'Home', href: '/' },
@@ -35,19 +44,52 @@ export default function Header() {
       href: '/about',
       dropdown: [
         { label: 'About Us', href: '/about' },
-        { label: 'Management', href: '/management' }
+        { label: 'Management', href: '/management' },
+        { label: 'Achievements', href: '/achievements' },
+        { label: 'Infrastructure', href: '/infrastructure' }
       ]
     },
-    { label: 'Academics', href: '/academics' },
-    { label: 'Admission', href: '/admission' },
-    { label: 'Facilities', href: '/facilities' },
-    { label: 'Gallery', href: '/gallery' },
+    { 
+      label: 'Academics', 
+      href: '/academics',
+      dropdown: [
+        { label: 'Programs', href: '/academics' },
+        { label: 'Calendar', href: '/calendar' },
+        { label: 'Results', href: '/results' }
+      ]
+    },
+    { 
+      label: 'Admission', 
+      href: '/admission',
+      dropdown: [
+        { label: 'Process', href: '/admission' },
+        { label: 'Fee Structure', href: '/fees' }
+      ]
+    },
+    { 
+      label: 'Campus', 
+      href: '/facilities',
+      dropdown: [
+        { label: 'Facilities', href: '/facilities' },
+        { label: 'Gallery', href: '/gallery' }
+      ]
+    },
+    { 
+      label: 'Information', 
+      href: '/mandatory-disclosure',
+      dropdown: [
+        { label: 'Mandatory Disclosure', href: '/mandatory-disclosure' },
+        { label: 'Policies', href: '/policies' },
+        { label: 'Governance', href: '/governance' },
+        { label: 'Compliance', href: '/compliance' }
+      ]
+    },
     { 
       label: 'Contact', 
       href: '/contact',
       dropdown: [
         { label: 'Contact Us', href: '/contact' },
-        { label: 'Feedback & Complaints', href: '/grievance' }
+        { label: 'Grievance', href: '/grievance' }
       ]
     },
   ];
@@ -215,36 +257,58 @@ export default function Header() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="lg:hidden pb-4 bg-white rounded-b-lg shadow-lg">
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-0.5">
               {menuItems.map((item) => {
                 const active = isActive(item.href);
                 
                 if (item.dropdown) {
+                  const isOpen = mobileDropdowns[item.label];
                   return (
-                    <div key={item.label}>
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsMenuOpen(false)}
-                        className={`px-4 py-3 rounded-lg transition-all duration-200 font-medium ${
-                          active
-                            ? 'text-[#af5f36] bg-orange-100 font-semibold'
-                            : 'text-gray-700 hover:text-[#af5f36] hover:bg-orange-50'
-                        }`}
-                      >
-                        {item.label}
-                      </Link>
-                      <div className="ml-4 mt-1 space-y-1">
-                        {item.dropdown.map((dropdownItem) => (
-                          <Link
-                            key={dropdownItem.label}
-                            href={dropdownItem.href}
-                            onClick={() => setIsMenuOpen(false)}
-                            className="block px-4 py-2 text-sm text-gray-600 hover:text-[#af5f36] hover:bg-orange-50 rounded-lg transition-colors"
+                    <div key={item.label} className="border-b border-gray-100 last:border-0">
+                      <div className="flex items-center justify-between">
+                        <Link
+                          href={item.href}
+                          onClick={() => setIsMenuOpen(false)}
+                          className={`flex-1 px-4 py-3.5 transition-all duration-200 font-medium text-[15px] ${
+                            active
+                              ? 'text-[#af5f36] font-semibold'
+                              : 'text-gray-700 hover:text-[#af5f36]'
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                        <button
+                          onClick={() => toggleMobileDropdown(item.label)}
+                          className={`px-4 py-3.5 transition-all duration-200 ${
+                            isOpen ? 'text-[#af5f36]' : 'text-gray-500'
+                          }`}
+                          aria-label={`Toggle ${item.label} dropdown`}
+                        >
+                          <svg 
+                            className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                            strokeWidth={2.5}
                           >
-                            {dropdownItem.label}
-                          </Link>
-                        ))}
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </button>
                       </div>
+                      {isOpen && (
+                        <div className="bg-orange-50/50 border-t border-orange-100">
+                          {item.dropdown.map((dropdownItem) => (
+                            <Link
+                              key={dropdownItem.label}
+                              href={dropdownItem.href}
+                              onClick={() => setIsMenuOpen(false)}
+                              className="block pl-8 pr-4 py-3 text-[14px] text-gray-600 hover:text-[#af5f36] hover:bg-orange-50 transition-colors border-b border-orange-100/50 last:border-0"
+                            >
+                              {dropdownItem.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   );
                 }
@@ -254,23 +318,25 @@ export default function Header() {
                     key={item.label}
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`px-4 py-3 rounded-lg transition-all duration-200 font-medium ${
+                    className={`px-4 py-3.5 transition-all duration-200 font-medium text-[15px] border-b border-gray-100 last:border-0 ${
                       active
-                        ? 'text-[#af5f36] bg-orange-100 font-semibold'
-                        : 'text-gray-700 hover:text-[#af5f36] hover:bg-orange-50'
+                        ? 'text-[#af5f36] font-semibold'
+                        : 'text-gray-700 hover:text-[#af5f36]'
                     }`}
                   >
                     {item.label}
                   </Link>
                 );
               })}
-              <Link
-                href="/admission"
-                onClick={() => setIsMenuOpen(false)}
-                className="mt-2 bg-[#af5f36] hover:bg-[#8b4a28] text-white px-6 py-3 rounded-full font-semibold text-center hover:shadow-lg transition-all duration-300"
-              >
-                Admissions Open
-              </Link>
+              <div className="px-4 pt-4">
+                <Link
+                  href="/admission"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block bg-[#af5f36] hover:bg-[#8b4a28] text-white px-6 py-3 rounded-full font-semibold text-center hover:shadow-lg transition-all duration-300"
+                >
+                  Admissions Open
+                </Link>
+              </div>
             </nav>
           </div>
         )}
@@ -278,6 +344,5 @@ export default function Header() {
     </header>
   );
 }
-
 
 
