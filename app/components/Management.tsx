@@ -1,4 +1,5 @@
 import schoolInfo from '../data/school-info';
+import Image from 'next/image';
 
 export default function Management() {
   return (
@@ -38,9 +39,61 @@ export default function Management() {
               <div className="grid md:grid-cols-5 gap-4 max-w-5xl mx-auto">
                 {schoolInfo.managingCommittee.map((member, index) => (
                   <div key={index} className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 text-center">
-                    <div className="w-12 h-12 bg-[#af5f36] rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold text-sm">
-                      {member.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
-                    </div>
+                    {member.designation === "President" ? (
+                      <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
+                        <Image
+                          src="/president.jpg"
+                          alt={member.name}
+                          width={64}
+                          height={64}
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+                    ) : member.designation === "Vice President" ? (
+                      <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
+                        <Image
+                          src="/vicepresident.png"
+                          alt={member.name}
+                          width={64}
+                          height={64}
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+                    ) : member.designation === "Secretary" ? (
+                      <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
+                        <Image
+                          src="/secretary.png"
+                          alt={member.name}
+                          width={64}
+                          height={64}
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+                    ) : member.designation === "Joint Secretary" ? (
+                      <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
+                        <Image
+                          src="/jointsec.png"
+                          alt={member.name}
+                          width={64}
+                          height={64}
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+                    ) : member.designation === "Treasurer" ? (
+                      <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
+                        <Image
+                          src="/treasurer.png"
+                          alt={member.name}
+                          width={64}
+                          height={64}
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-12 h-12 bg-[#af5f36] rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold text-sm">
+                        {member.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                      </div>
+                    )}
                     <h4 className="font-bold text-[#af5f36] text-sm">{member.designation}</h4>
                     <p className="text-gray-700 text-xs font-medium">{member.name}</p>
                   </div>
