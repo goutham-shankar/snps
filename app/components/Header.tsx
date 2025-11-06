@@ -45,17 +45,17 @@ export default function Header() {
       dropdown: [
         { label: 'About Us', href: '/about' },
         { label: 'Management', href: '/management' },
+        { 
+          label: 'Academics', 
+          href: '/academics',
+          subDropdown: [
+            { label: 'Programs', href: '/academics' },
+            { label: 'Calendar', href: '/calendar' },
+            { label: 'Results', href: '/results' }
+          ]
+        },
         { label: 'Achievements', href: '/achievements' },
         { label: 'Infrastructure', href: '/infrastructure' }
-      ]
-    },
-    { 
-      label: 'Academics', 
-      href: '/academics',
-      dropdown: [
-        { label: 'Programs', href: '/academics' },
-        { label: 'Calendar', href: '/calendar' },
-        { label: 'Results', href: '/results' }
       ]
     },
     { 
@@ -176,16 +176,45 @@ export default function Header() {
                     </Link>
                     
                     {/* Dropdown Menu */}
-                    <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                      {item.dropdown.map((dropdownItem) => (
-                        <Link
-                          key={dropdownItem.label}
-                          href={dropdownItem.href}
-                          className="block px-4 py-3 text-gray-700 hover:text-[#af5f36] hover:bg-orange-50 transition-colors first:rounded-t-lg last:rounded-b-lg"
-                        >
-                          {dropdownItem.label}
-                        </Link>
-                      ))}
+                    <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                      {item.dropdown.map((dropdownItem) => {
+                        if (dropdownItem.subDropdown) {
+                          return (
+                            <div key={dropdownItem.label} className="relative submenu-group">
+                              <Link
+                                href={dropdownItem.href}
+                                className="block px-4 py-3 text-gray-700 hover:text-[#af5f36] hover:bg-orange-50 transition-colors first:rounded-t-lg flex items-center justify-between group/submenu"
+                              >
+                                <span>{dropdownItem.label}</span>
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                              </Link>
+                              {/* Nested Submenu */}
+                              <div className="absolute left-full top-0 ml-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover/submenu:opacity-100 group-hover/submenu:visible transition-all duration-200 z-50">
+                                {dropdownItem.subDropdown.map((subItem) => (
+                                  <Link
+                                    key={subItem.label}
+                                    href={subItem.href}
+                                    className="block px-4 py-3 text-gray-700 hover:text-[#af5f36] hover:bg-orange-50 transition-colors first:rounded-t-lg last:rounded-b-lg"
+                                  >
+                                    {subItem.label}
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          );
+                        }
+                        return (
+                          <Link
+                            key={dropdownItem.label}
+                            href={dropdownItem.href}
+                            className="block px-4 py-3 text-gray-700 hover:text-[#af5f36] hover:bg-orange-50 transition-colors first:rounded-t-lg last:rounded-b-lg"
+                          >
+                            {dropdownItem.label}
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 );
@@ -297,16 +326,68 @@ export default function Header() {
                       </div>
                       {isOpen && (
                         <div className="bg-orange-50/50 border-t border-orange-100">
-                          {item.dropdown.map((dropdownItem) => (
-                            <Link
-                              key={dropdownItem.label}
-                              href={dropdownItem.href}
-                              onClick={() => setIsMenuOpen(false)}
-                              className="block pl-8 pr-4 py-3 text-[14px] text-gray-600 hover:text-[#af5f36] hover:bg-orange-50 transition-colors border-b border-orange-100/50 last:border-0"
-                            >
-                              {dropdownItem.label}
-                            </Link>
-                          ))}
+                          {item.dropdown.map((dropdownItem) => {
+                            if (dropdownItem.subDropdown) {
+                              const subIsOpen = mobileDropdowns[`${item.label}-${dropdownItem.label}`];
+                              return (
+                                <div key={dropdownItem.label} className="border-b border-orange-100/50 last:border-0">
+                                  <div className="flex items-center justify-between">
+                                    <Link
+                                      href={dropdownItem.href}
+                                      onClick={() => setIsMenuOpen(false)}
+                                      className="flex-1 pl-8 pr-4 py-3 text-[14px] text-gray-600 hover:text-[#af5f36] hover:bg-orange-50 transition-colors"
+                                    >
+                                      {dropdownItem.label}
+                                    </Link>
+                                    <button
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        toggleMobileDropdown(`${item.label}-${dropdownItem.label}`);
+                                      }}
+                                      className={`px-4 py-3 transition-all duration-200 ${
+                                        subIsOpen ? 'text-[#af5f36]' : 'text-gray-500'
+                                      }`}
+                                      aria-label={`Toggle ${dropdownItem.label} submenu`}
+                                    >
+                                      <svg 
+                                        className={`w-4 h-4 transition-transform duration-300 ${subIsOpen ? 'rotate-90' : ''}`}
+                                        fill="none" 
+                                        stroke="currentColor" 
+                                        viewBox="0 0 24 24"
+                                        strokeWidth={2.5}
+                                      >
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                      </svg>
+                                    </button>
+                                  </div>
+                                  {subIsOpen && (
+                                    <div className="bg-orange-100/30 border-t border-orange-200/50">
+                                      {dropdownItem.subDropdown.map((subItem) => (
+                                        <Link
+                                          key={subItem.label}
+                                          href={subItem.href}
+                                          onClick={() => setIsMenuOpen(false)}
+                                          className="block pl-12 pr-4 py-2.5 text-[13px] text-gray-600 hover:text-[#af5f36] hover:bg-orange-50 transition-colors border-b border-orange-200/30 last:border-0"
+                                        >
+                                          {subItem.label}
+                                        </Link>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            }
+                            return (
+                              <Link
+                                key={dropdownItem.label}
+                                href={dropdownItem.href}
+                                onClick={() => setIsMenuOpen(false)}
+                                className="block pl-8 pr-4 py-3 text-[14px] text-gray-600 hover:text-[#af5f36] hover:bg-orange-50 transition-colors border-b border-orange-100/50 last:border-0"
+                              >
+                                {dropdownItem.label}
+                              </Link>
+                            );
+                          })}
                         </div>
                       )}
                     </div>
