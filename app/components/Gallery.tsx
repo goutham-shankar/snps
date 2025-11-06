@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import Image from 'next/image';
 
 interface GalleryImage {
   id: string;
@@ -362,19 +363,15 @@ export default function Gallery() {
               onClick={() => openPreview(image)}
               className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all cursor-pointer bg-white border border-gray-200"
             >
-              <div className="relative aspect-square">
-                <img
+              <div className="relative aspect-square overflow-hidden">
+                <Image
                   src={image.src}
                   alt={image.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                  fill
+                  className="object-cover group-hover:scale-110 transition duration-500"
+                  quality={50}
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   loading="lazy"
-                  decoding="async"
-                  width={400}
-                  height={400}
-                  onError={(e) => {
-                    // Hide broken images
-                    (e.target as HTMLImageElement).style.display = 'none';
-                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 
@@ -471,11 +468,15 @@ export default function Gallery() {
               )}
 
               {/* Image */}
-              <div onClick={(e) => e.stopPropagation()}>
-                <img
+              <div onClick={(e) => e.stopPropagation()} className="relative w-full max-h-[90vh] flex items-center justify-center">
+                <Image
                   src={selectedImage.src}
                   alt={selectedImage.title}
+                  width={1200}
+                  height={800}
                   className="max-w-full max-h-[90vh] mx-auto object-contain rounded-lg"
+                  quality={100}
+                  priority
                 />
               </div>
 
