@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 interface GalleryImage {
   id: string;
@@ -9,17 +9,50 @@ interface GalleryImage {
   title: string;
 }
 
+// Icon Components
+const Icons = {
+  AllPhotos: () => (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>
+  ),
+  Academics: () => (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+    </svg>
+  ),
+  Arts: () => (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4 4 4 0 004-4V5z" />
+    </svg>
+  ),
+  Sports: () => (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+    </svg>
+  ),
+  School: () => (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+    </svg>
+  )
+};
+
 export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState<'all' | 'academics' | 'arts' | 'sports' | 'school'>('all');
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
   const [images, setImages] = useState<GalleryImage[]>([]);
+  const [visibleImages, setVisibleImages] = useState<GalleryImage[]>([]);
+  const [loadedCount, setLoadedCount] = useState(16);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   const categories = [
-    { id: 'all' as const, name: 'All Photos', icon: '📸' },
-    { id: 'academics' as const, name: 'Academics', icon: '📚' },
-    { id: 'arts' as const, name: 'Arts', icon: '🎨' },
-    { id: 'sports' as const, name: 'Sports', icon: '⚽' },
-    { id: 'school' as const, name: 'School', icon: '🏫' }
+    { id: 'all' as const, name: 'All Photos', icon: Icons.AllPhotos },
+    { id: 'academics' as const, name: 'Academics', icon: Icons.Academics },
+    { id: 'arts' as const, name: 'Arts', icon: Icons.Arts },
+    { id: 'sports' as const, name: 'Sports', icon: Icons.Sports },
+    { id: 'school' as const, name: 'School', icon: Icons.School }
   ];
 
   // Initialize images
@@ -169,6 +202,48 @@ export default function Gallery() {
     ? images 
     : images.filter(img => img.category === activeCategory);
 
+  // Reset loaded count when category changes
+  useEffect(() => {
+    setLoadedCount(16);
+  }, [activeCategory]);
+
+  // Update visible images with lazy loading
+  useEffect(() => {
+    setVisibleImages(filteredImages.slice(0, loadedCount));
+  }, [filteredImages, loadedCount]);
+
+  // Intersection Observer for lazy loading
+  const loadMoreImages = useCallback(() => {
+    if (loadedCount < filteredImages.length) {
+      setLoadedCount(prev => Math.min(prev + 16, filteredImages.length));
+    }
+  }, [loadedCount, filteredImages.length]);
+
+  useEffect(() => {
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+    }
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && loadedCount < filteredImages.length) {
+          loadMoreImages();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (loadMoreRef.current) {
+      observerRef.current.observe(loadMoreRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [loadMoreImages, loadedCount, filteredImages.length]);
+
   const openPreview = (image: GalleryImage) => {
     setSelectedImage(image);
     document.body.style.overflow = 'hidden';
@@ -240,20 +315,23 @@ export default function Gallery() {
 
           {/* Category Filter */}
           <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`px-5 py-2.5 rounded-lg font-semibold transition-all border ${
-                  activeCategory === category.id
-                    ? 'bg-[#af5f36] text-white border-[#af5f36] shadow-md'
-                    : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-200'
-                }`}
-              >
-                <span className="mr-2">{category.icon}</span>
-                {category.name}
-              </button>
-            ))}
+            {categories.map((category) => {
+              const IconComponent = category.icon;
+              return (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                  className={`px-5 py-2.5 rounded-lg font-semibold transition-all border flex items-center gap-2 ${
+                    activeCategory === category.id
+                      ? 'bg-[#af5f36] text-white border-[#af5f36] shadow-md'
+                      : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-200'
+                  }`}
+                >
+                  <IconComponent />
+                  {category.name}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -278,7 +356,7 @@ export default function Gallery() {
 
         {/* Gallery Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-12 md:mb-16">
-          {filteredImages.map((image) => (
+          {visibleImages.map((image) => (
             <div
               key={image.id}
               onClick={() => openPreview(image)}
@@ -291,6 +369,8 @@ export default function Gallery() {
                   className="w-full h-full object-cover group-hover:scale-110 transition duration-500"
                   loading="lazy"
                   decoding="async"
+                  width={400}
+                  height={400}
                   onError={(e) => {
                     // Hide broken images
                     (e.target as HTMLImageElement).style.display = 'none';
@@ -323,6 +403,20 @@ export default function Gallery() {
             </div>
           ))}
         </div>
+
+        {/* Load More Trigger */}
+        {loadedCount < filteredImages.length && (
+          <div ref={loadMoreRef} className="flex justify-center py-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-2 border-[#af5f36] border-t-transparent"></div>
+          </div>
+        )}
+
+        {/* End of Gallery Message */}
+        {loadedCount >= filteredImages.length && filteredImages.length > 16 && (
+          <div className="text-center py-8">
+            <p className="text-gray-600">All images loaded</p>
+          </div>
+        )}
 
         {/* Empty State */}
         {filteredImages.length === 0 && (
