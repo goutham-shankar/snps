@@ -180,18 +180,18 @@ export default function Header() {
                       {item.dropdown.map((dropdownItem) => {
                         if (dropdownItem.subDropdown) {
                           return (
-                            <div key={dropdownItem.label} className="relative submenu-group">
+                            <div key={dropdownItem.label} className="relative group/nested">
                               <Link
                                 href={dropdownItem.href}
-                                className="block px-4 py-3 text-gray-700 hover:text-[#af5f36] hover:bg-orange-50 transition-colors first:rounded-t-lg flex items-center justify-between group/submenu"
+                                className="block px-4 py-3 text-gray-700 hover:text-[#af5f36] hover:bg-orange-50 transition-colors first:rounded-t-lg flex items-center justify-between"
                               >
                                 <span>{dropdownItem.label}</span>
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-4 h-4 ml-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                 </svg>
                               </Link>
-                              {/* Nested Submenu */}
-                              <div className="absolute left-full top-0 ml-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover/submenu:opacity-100 group-hover/submenu:visible transition-all duration-200 z-50">
+                              {/* Nested Submenu - positioned to the right */}
+                              <div className="absolute left-full top-0 ml-1 w-48 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover/nested:opacity-100 group-hover/nested:visible transition-all duration-200 z-[60] whitespace-nowrap">
                                 {dropdownItem.subDropdown.map((subItem) => (
                                   <Link
                                     key={subItem.label}
