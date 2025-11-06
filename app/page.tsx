@@ -139,7 +139,7 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg">
                   <Image
-                    src="https://images.pexels.com/photos/8500020/pexels-photo-8500020.jpeg"
+                    src="/SCHOOL.JPG"
                     alt="Students Learning"
                     width={300}
                     height={400}
