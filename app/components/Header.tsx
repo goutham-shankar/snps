@@ -191,7 +191,7 @@ export default function Header() {
                                 </svg>
                               </Link>
                               {/* Nested Submenu - positioned to the right */}
-                              <div className="absolute left-full top-0 ml-1 w-48 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover/nested:opacity-100 group-hover/nested:visible transition-all duration-200 z-[60] whitespace-nowrap">
+                              <div className="nested-submenu absolute left-full top-0 ml-1 w-48 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover/nested:opacity-100 group-hover/nested:visible transition-all duration-200 z-[60] whitespace-nowrap">
                                 {dropdownItem.subDropdown.map((subItem) => (
                                   <Link
                                     key={subItem.label}

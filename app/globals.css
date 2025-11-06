@@ -50,7 +50,7 @@ html {
 }
 
 /* Nested dropdown support - ensures nested menu shows on hover */
-.group\/nested:hover > div[class*="group-hover/nested"] {
+.group\/nested:hover .nested-submenu {
   opacity: 1 !important;
   visibility: visible !important;
 }
