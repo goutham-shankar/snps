@@ -1,4 +1,4 @@
-# 🏫 Sree Narayana Public School Website
+# 🏫 Sree Narayana Public School Website   
 
 **"Enlightenment through Education"**
 
