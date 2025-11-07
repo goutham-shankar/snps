@@ -78,7 +78,6 @@ export default function SuccessModal({
                   <>
                     <strong className="text-[#af5f36]">What's Next?</strong>
                     <ul className="mt-2 space-y-1 list-disc list-inside text-gray-600">
-                      <li>Check your email for confirmation</li>
                       <li>Our team will contact you soon</li>
                       <li>Prepare required documents</li>
                     </ul>
@@ -87,7 +86,6 @@ export default function SuccessModal({
                   <>
                     <strong className="text-[#af5f36]">What Happens Next?</strong>
                     <ul className="mt-2 space-y-1 list-disc list-inside text-gray-600">
-                      <li>You'll receive an acknowledgment email</li>
                       <li>Your concern will be reviewed</li>
                       <li>We'll provide updates on resolution</li>
                     </ul>
