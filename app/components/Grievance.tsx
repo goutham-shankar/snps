@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import schoolInfo from '../data/school-info';
+import SuccessModal from './SuccessModal';
 
 export default function Grievance() {
   const [formData, setFormData] = useState({
@@ -13,11 +14,58 @@ export default function Grievance() {
     description: '',
     priority: 'medium'
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Thank you for your feedback. Your submission has been received and will be addressed promptly.');
-    // Here you would typically send the data to a backend
+    setIsSubmitting(true);
+
+    try {
+      const formDataToSend = new FormData();
+      
+      // Add form fields
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('phone', formData.phone);
+      formDataToSend.append('category', formData.category);
+      formDataToSend.append('subject', formData.subject);
+      formDataToSend.append('description', formData.description);
+      formDataToSend.append('priority', formData.priority);
+      formDataToSend.append('message', `Feedback/Complaint Submission\n\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nCategory: ${formData.category}\nPriority: ${formData.priority}\nSubject: ${formData.subject}\n\nDescription:\n${formData.description}`);
+      
+      // Add Web3Forms access key
+      formDataToSend.append('access_key', '0fb3d977-2f38-40dc-93e2-68d6e162ba8b');
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataToSend
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          category: '',
+          subject: '',
+          description: '',
+          priority: 'medium'
+        });
+        // Show success modal
+        setShowSuccessModal(true);
+      } else {
+        alert('There was an error submitting your feedback. Please try again or contact us directly.');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('There was an error submitting your feedback. Please try again or contact us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -392,13 +440,31 @@ export default function Grievance() {
               
               <button
                 type="submit"
-                className="w-full bg-[#af5f36] hover:bg-[#8b4a28] text-white py-4 px-6 rounded-lg font-bold text-lg transition-colors"
+                disabled={isSubmitting}
+                className="w-full bg-[#af5f36] hover:bg-[#8b4a28] disabled:bg-gray-400 disabled:cursor-not-allowed text-white py-4 px-6 rounded-lg font-bold text-lg transition-colors flex items-center justify-center gap-2"
               >
-                Submit Feedback
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Submitting...
+                  </>
+                ) : (
+                  'Submit Feedback'
+                )}
               </button>
             </form>
           </div>
         </div>
+
+        {/* Success Modal */}
+        <SuccessModal
+          isOpen={showSuccessModal}
+          onClose={() => setShowSuccessModal(false)}
+          type="grievance"
+        />
       </div>
     </section>
   );

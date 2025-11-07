@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import schoolInfo from '../data/school-info';
+import SuccessModal from './SuccessModal';
 
 export default function Admission() {
   const [formData, setFormData] = useState({
@@ -13,11 +14,59 @@ export default function Admission() {
     phone: '',
     address: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Thank you for your interest! Our admission team will contact you soon.');
-    // Here you would typically send the data to a backend
+    setIsSubmitting(true);
+
+    try {
+      const formDataToSend = new FormData();
+      
+      // Add form fields
+      formDataToSend.append('studentName', formData.studentName);
+      formDataToSend.append('dob', formData.dob);
+      formDataToSend.append('grade', formData.grade);
+      formDataToSend.append('parentName', formData.parentName);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('phone', formData.phone);
+      formDataToSend.append('address', formData.address);
+      formDataToSend.append('subject', `Admission Inquiry - ${formData.studentName} - Grade ${formData.grade}`);
+      formDataToSend.append('message', `Admission Inquiry Form Submission\n\nStudent Name: ${formData.studentName}\nDate of Birth: ${formData.dob}\nGrade Applying For: ${formData.grade}\nParent/Guardian Name: ${formData.parentName}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nAddress: ${formData.address}`);
+      
+      // Add Web3Forms access key
+      formDataToSend.append('access_key', '869c90ba-d102-4a67-96d4-c7ca37ceeb90');
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataToSend
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Reset form
+        setFormData({
+          studentName: '',
+          dob: '',
+          grade: '',
+          parentName: '',
+          email: '',
+          phone: '',
+          address: ''
+        });
+        // Show success modal
+        setShowSuccessModal(true);
+      } else {
+        alert('There was an error submitting your form. Please try again or contact us directly.');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('There was an error submitting your form. Please try again or contact us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -254,9 +303,20 @@ export default function Admission() {
                 
                 <button
                   type="submit"
-                  className="w-full bg-[#af5f36] hover:bg-[#8b4a28] text-white py-4 px-6 rounded-lg font-bold text-lg transition-colors"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#af5f36] hover:bg-[#8b4a28] disabled:bg-gray-400 disabled:cursor-not-allowed text-white py-4 px-6 rounded-lg font-bold text-lg transition-colors flex items-center justify-center gap-2"
                 >
-                  Submit Inquiry
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Submitting...
+                    </>
+                  ) : (
+                    'Submit Inquiry'
+                  )}
                 </button>
               </form>
             </div>
@@ -347,6 +407,13 @@ export default function Admission() {
             </div>
           </div>
         </div>
+
+        {/* Success Modal */}
+        <SuccessModal
+          isOpen={showSuccessModal}
+          onClose={() => setShowSuccessModal(false)}
+          type="admission"
+        />
       </div>
     </section>
   );
