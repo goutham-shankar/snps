@@ -109,10 +109,14 @@ export default function Management() {
             {/* Principal Level */}
             <div className="text-center mb-8">
               <div className="inline-block bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-lg p-6 shadow-lg text-white">
-                <div className="w-16 h-16 bg-white/20 rounded-full mx-auto mb-3 flex items-center justify-center text-white">
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
+                <div className="w-16 h-16 rounded-full mx-auto mb-3 overflow-hidden border-2 border-white/20 shadow-lg">
+                  <Image
+                    src="/PRINCI.jpg"
+                    alt={`${schoolInfo.principal.name} - Principal`}
+                    width={64}
+                    height={64}
+                    className="object-cover w-full h-full"
+                  />
                 </div>
                 <h3 className="font-bold text-lg">{schoolInfo.principal.name}</h3>
                 <p className="text-orange-200 font-semibold">{schoolInfo.principal.title}</p>
