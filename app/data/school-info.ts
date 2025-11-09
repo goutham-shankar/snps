@@ -16,7 +16,8 @@ export const schoolInfo = {
   established: 2015,
   campusSize: "14 acres", // Updated from 13 to 14 acres
   affiliation: "CBSE, New Delhi",
-  affiliationNumber: "", // To be added when available
+  affiliationNumber: "931452",
+  schoolType: "Sr Secondary",
   grades: "Pre-KG to Grade XII",
   managingBody: "Sree Narayana Educational Society, Kollam",
   
@@ -30,21 +31,23 @@ export const schoolInfo = {
   
   // Leadership
   principal: {
-    name: "Gireesh Babu K. V.",
+    name: "Gireesh Babu K V",
     title: "Principal",
-    designation: "Principal, Sree Narayana Public School, Chathannoor – Vilappuram (Proposed New Sainik School)"
+    designation: "Principal, Sree Narayana Public School, Chathannoor – Vilappuram (Proposed New Sainik School)",
+    phone: "80868 41985"
   },
   
-  // Contact Information (Placeholders - to be updated with actual data)
+  // Contact Information
   contact: {
     phone: {
-      main: "+91 XXXX-XXXXXX", // To be updated
-      admission: "+91 XXXX-XXXXXX", // To be updated
-      mobile: "", // To be added if available
+      main: "94467 92941",
+      admission: "94467 92941",
+      mobile: "94467 92941",
+      principal: "80868 41985"
     },
     email: {
-      general: "info@snpschool.edu.in", // Verify domain
-      admissions: "admissions@snpschool.edu.in", // Verify domain
+      general: "snpschathannoor12@gmail.com",
+      admissions: "snpschathannoor12@gmail.com",
     },
     address: {
       full: "Sree Narayana Public School, Chathannoor – Vilappuram, Kollam District, Kerala, India - 691572",
@@ -53,8 +56,8 @@ export const schoolInfo = {
       line3: "Kollam District, Kerala, India - 691572",
     },
     officeHours: {
-      weekdays: "8:00 AM - 4:00 PM",
-      saturday: "9:00 AM - 1:00 PM", 
+      weekdays: "08:30 AM - 04:00 PM",
+      saturday: "08:30 AM - 04:00 PM", 
       sunday: "Closed",
     },
     mapCoordinates: {

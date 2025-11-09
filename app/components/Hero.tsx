@@ -10,19 +10,18 @@ export default function Hero() {
     {
       title: "Excellence in Holistic Education",
       subtitle: "Nurturing Future Leaders Since 2015",
-      imageUrl: "https://images.pexels.com/photos/3401403/pexels-photo-3401403.jpeg",
-      fallbackUrl:
-        "https://plus.unsplash.com/premium_photo-1664299825291-909568eb8db7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
+      imageUrl: "/schooimg/SCHOOL.JPG",
+      fallbackUrl: "/schooimg/IMG-20251102-WA0154.jpg",
     },
     {
       title: "14 Acres of Eco-Friendly Campus",
       subtitle: "A Safe and Inspiring Learning Environment",
-  imageUrl: "https://images.pexels.com/photos/159844/cellular-education-classroom-159844.jpeg",
+      imageUrl: "/schooimg/IMG_20251108_120411.jpg",
     },
     {
       title: "CBSE Affiliated Excellence",
       subtitle: "From Pre-KG to Grade XII",
-  imageUrl: "https://images.pexels.com/photos/1001675/pexels-photo-1001675.jpeg",
+      imageUrl: "/schooimg/IMG_20251108_120800.jpg",
     },
   ];
 

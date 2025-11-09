@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import schoolInfo from '../data/school-info';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -40,12 +41,12 @@ export default function Footer() {
               />
             </div>
             <div className="text-left">
-              <h3 className="font-bold text-2xl text-white mb-1">Sree Narayana Public School</h3>
-              <p className="text-sm text-gray-400">Chathannoor – Vilappuram | CBSE Affiliated</p>
+              <h3 className="font-bold text-2xl text-white mb-1">{schoolInfo.name}</h3>
+              <p className="text-sm text-gray-400">{schoolInfo.fullLocation} | {schoolInfo.affiliation}</p>
             </div>
           </Link>
           <p className="text-gray-400 text-lg leading-relaxed italic max-w-3xl mx-auto">
-            &quot;Empowering minds, nurturing values, and shaping future leaders on our 14-acre campus since 2015. Enlightenment through Education.&quot;
+            &quot;Empowering minds, nurturing values, and shaping future leaders on our {schoolInfo.campusSize} campus since {schoolInfo.established}. {schoolInfo.motto}.&quot;
           </p>
         </div>
 
@@ -107,20 +108,20 @@ export default function Footer() {
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
-                <span>Chathannoor – Vilappuram, Kollam, Kerala</span>
+                <span>{schoolInfo.contact.address.line2}, {schoolInfo.district}, {schoolInfo.state}</span>
               </li>
               <li className="flex items-start gap-3 text-gray-400">
                 <svg className="w-5 h-5 mt-0.5 text-[#af5f36] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                 </svg>
-                <span>+91 XXXX-XXXXXX</span>
+                <span>{schoolInfo.contact.phone.main}</span>
               </li>
               <li className="flex items-start gap-3 text-gray-400">
                 <svg className="w-5 h-5 mt-0.5 text-[#af5f36] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                   <polyline points="22,6 12,13 2,6"></polyline>
                 </svg>
-                <span>info@snpschool.edu.in</span>
+                <span>{schoolInfo.contact.email.general}</span>
               </li>
             </ul>
           </div>
@@ -130,7 +131,7 @@ export default function Footer() {
         <div className="border-t border-slate-800 pt-8 mt-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
             <p>
-              © {currentYear} Sree Narayana Public School. All rights reserved.
+              © {currentYear} {schoolInfo.name}. All rights reserved.
             </p>
             <p className="text-gray-500">
               Designed and developed by{' '}

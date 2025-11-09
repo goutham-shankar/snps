@@ -242,8 +242,8 @@ export default function Academics() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
-              { src: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=800&auto=format&fit=crop", alt: "Modern Classrooms", title: "Smart Classrooms" },
-              { src: "https://images.unsplash.com/photo-1581726707445-75cbe4efc586?q=80&w=800&auto=format&fit=crop", alt: "Science Labs", title: "Advanced Labs" }
+              { src: "/gallery/academics/20251101_11937PMByGPSMapCamera.jpg", alt: "Modern Classrooms", title: "Smart Classrooms" },
+              { src: "/gallery/academics/20251101_12518PMByGPSMapCamera.jpg", alt: "Science Labs", title: "Advanced Labs" }
             ].map((img, i) => (
               <div 
                 key={i}

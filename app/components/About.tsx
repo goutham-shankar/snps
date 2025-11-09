@@ -391,10 +391,10 @@ export default function About() {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop", alt: "Students" },
-              { src: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=800&auto=format&fit=crop", alt: "Classroom" },
-              { src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop", alt: "Learning" },
-              { src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=800&auto=format&fit=crop", alt: "Activities" }
+              { src: "/schooimg/SCHOOL.JPG", alt: "School Building" },
+              { src: "/schooimg/IMG_20251108_120411.jpg", alt: "Campus Building" },
+              { src: "/schooimg/IMG-20251102-WA0156.jpg", alt: "School Infrastructure" },
+              { src: "/schooimg/IMG_20251108_121231.jpg", alt: "Campus Facilities" }
             ].map((img, i) => (
               <div 
                 key={i}

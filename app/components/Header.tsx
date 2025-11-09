@@ -53,9 +53,7 @@ export default function Header() {
             { label: 'Calendar', href: '/calendar' },
             { label: 'Results', href: '/results' }
           ]
-        },
-        { label: 'Achievements', href: '/achievements' },
-        { label: 'Infrastructure', href: '/infrastructure' }
+        }
       ]
     },
     { 

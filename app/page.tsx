@@ -147,8 +147,8 @@ export default function Home() {
                   />
                 </div>
                 <div className="relative h-64 rounded-2xl overflow-hidden shadow-lg mt-8">
-                  <Image
-                    src="https://images.pexels.com/photos/159844/cellular-education-classroom-159844.jpeg"
+                  <img
+                    src="/schooimg/IMG_20251108_121231.jpg"
                     alt="Classroom"
                     width={300}
                     height={400}
@@ -400,7 +400,7 @@ export default function Home() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="relative h-72 rounded-2xl overflow-hidden shadow-lg group">
                 <Image
-                  src="https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg"
+                  src="/gallery/academics/20251101_11937PMByGPSMapCamera.jpg"
                   alt="Smart Classrooms"
                   width={400}
                   height={300}
@@ -415,7 +415,7 @@ export default function Home() {
               </div>
               <div className="relative h-72 rounded-2xl overflow-hidden shadow-lg group">
                 <Image
-                  src="https://images.pexels.com/photos/159844/cellular-education-classroom-159844.jpeg"
+                  src="/gallery/academics/20251101_13026PMByGPSMapCamera.jpg"
                   alt="Modern Labs"
                   width={400}
                   height={300}
@@ -430,7 +430,7 @@ export default function Home() {
               </div>
               <div className="relative h-72 rounded-2xl overflow-hidden shadow-lg group">
                 <Image
-                  src="https://images.pexels.com/photos/1692693/pexels-photo-1692693.jpeg"
+                  src="/gallery/academics/20251101_115033AMByGPSMapCamera.jpg"
                   alt="Sports Facilities"
                   width={400}
                   height={300}
@@ -445,7 +445,7 @@ export default function Home() {
               </div>
               <div className="relative h-72 rounded-2xl overflow-hidden shadow-lg group">
                 <Image
-                  src="https://images.pexels.com/photos/256395/pexels-photo-256395.jpeg"
+                  src="/gallery/academics/20251101_120437PMByGPSMapCamera.jpg"
                   alt="Library"
                   width={400}
                   height={300}

@@ -44,23 +44,23 @@ export default function Management() {
               </div>
 
               {/* Row 1: President | Secretary */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
                 {president && (
-                  <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 text-center">
-                    <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
-                      <Image src="/president.jpg" alt={president.name} width={64} height={64} className="object-cover w-full h-full" />
+                  <div className="bg-gray-50 border-2 border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
+                    <div className="w-24 h-24 rounded-full mx-auto mb-3 overflow-hidden border-3 border-[#af5f36] shadow-lg">
+                      <Image src="/president.jpg" alt={president.name} width={96} height={96} className="object-cover w-full h-full" />
                     </div>
-                    <h4 className="font-bold text-[#af5f36] text-sm">President</h4>
-                    <p className="text-gray-700 text-xs font-medium">{president.name}</p>
+                    <h4 className="font-bold text-[#af5f36] text-lg mb-1">President</h4>
+                    <p className="text-gray-700 text-base font-medium">{president.name}</p>
                   </div>
                 )}
                 {secretary && (
-                  <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 text-center">
-                    <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
-                      <Image src="/secretary.png" alt={secretary.name} width={64} height={64} className="object-cover w-full h-full" />
+                  <div className="bg-gray-50 border-2 border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
+                    <div className="w-24 h-24 rounded-full mx-auto mb-3 overflow-hidden border-3 border-[#af5f36] shadow-lg">
+                      <Image src="/secretary.png" alt={secretary.name} width={96} height={96} className="object-cover w-full h-full" />
                     </div>
-                    <h4 className="font-bold text-[#af5f36] text-sm">Secretary</h4>
-                    <p className="text-gray-700 text-xs font-medium">{secretary.name}</p>
+                    <h4 className="font-bold text-[#af5f36] text-lg mb-1">Secretary</h4>
+                    <p className="text-gray-700 text-base font-medium">{secretary.name}</p>
                   </div>
                 )}
               </div>
@@ -72,13 +72,13 @@ export default function Management() {
 
               {/* Row 2: Treasurer */}
               {treasurer && (
-                <div className="max-w-sm mx-auto mb-6">
-                  <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 text-center">
-                    <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
-                      <Image src="/treasurer.png" alt={treasurer.name} width={64} height={64} className="object-cover w-full h-full" />
+                <div className="max-w-md mx-auto mb-8">
+                  <div className="bg-gray-50 border-2 border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
+                    <div className="w-24 h-24 rounded-full mx-auto mb-3 overflow-hidden border-3 border-[#af5f36] shadow-lg">
+                      <Image src="/treasurer.png" alt={treasurer.name} width={96} height={96} className="object-cover w-full h-full" />
                     </div>
-                    <h4 className="font-bold text-[#af5f36] text-sm">Treasurer</h4>
-                    <p className="text-gray-700 text-xs font-medium">{treasurer.name}</p>
+                    <h4 className="font-bold text-[#af5f36] text-lg mb-1">Treasurer</h4>
+                    <p className="text-gray-700 text-base font-medium">{treasurer.name}</p>
                   </div>
                 </div>
               )}
@@ -89,23 +89,23 @@ export default function Management() {
               </div>
 
               {/* Row 3: Vice President | Joint Secretary */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                 {vicePresident && (
-                  <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 text-center">
-                    <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
-                      <Image src="/vicepresident.png" alt={vicePresident.name} width={64} height={64} className="object-cover w-full h-full" />
+                  <div className="bg-gray-50 border-2 border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
+                    <div className="w-24 h-24 rounded-full mx-auto mb-3 overflow-hidden border-3 border-[#af5f36] shadow-lg">
+                      <Image src="/vicepresident.png" alt={vicePresident.name} width={96} height={96} className="object-cover w-full h-full" />
                     </div>
-                    <h4 className="font-bold text-[#af5f36] text-sm">Vice President</h4>
-                    <p className="text-gray-700 text-xs font-medium">{vicePresident.name}</p>
+                    <h4 className="font-bold text-[#af5f36] text-lg mb-1">Vice President</h4>
+                    <p className="text-gray-700 text-base font-medium">{vicePresident.name}</p>
                   </div>
                 )}
                 {jointSecretary && (
-                  <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 text-center">
-                    <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
-                      <Image src="/jointsec.png" alt={jointSecretary.name} width={64} height={64} className="object-cover w-full h-full" />
+                  <div className="bg-gray-50 border-2 border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
+                    <div className="w-24 h-24 rounded-full mx-auto mb-3 overflow-hidden border-3 border-[#af5f36] shadow-lg">
+                      <Image src="/jointsec.png" alt={jointSecretary.name} width={96} height={96} className="object-cover w-full h-full" />
                     </div>
-                    <h4 className="font-bold text-[#af5f36] text-sm">Joint Secretary</h4>
-                    <p className="text-gray-700 text-xs font-medium">{jointSecretary.name}</p>
+                    <h4 className="font-bold text-[#af5f36] text-lg mb-1">Joint Secretary</h4>
+                    <p className="text-gray-700 text-base font-medium">{jointSecretary.name}</p>
                   </div>
                 )}
               </div>

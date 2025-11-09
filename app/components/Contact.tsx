@@ -1,3 +1,5 @@
+import schoolInfo from '../data/school-info';
+
 export default function Contact() {
   return (
     <section id="contact" className="py-16 md:py-20 bg-gray-50">
@@ -34,9 +36,9 @@ export default function Contact() {
                   <div>
                     <h4 className="font-bold text-[#af5f36] mb-1">Address</h4>
                     <p className="text-gray-600">
-                      Sree Narayana Public School<br />
-                      Chathannoor – Vilappuram, Kollam District<br />
-                      Kerala, India - 691572
+                      {schoolInfo.name}<br />
+                      {schoolInfo.contact.address.line2}, {schoolInfo.district} District<br />
+                      {schoolInfo.state}, India - {schoolInfo.pinCode}
                     </p>
                   </div>
                 </div>
@@ -50,8 +52,7 @@ export default function Contact() {
                   <div>
                     <h4 className="font-bold text-[#af5f36] mb-1">Phone</h4>
                     <p className="text-gray-600">
-                      Main Office: +91 XXXX-XXXXXX<br />
-                      Admission Office: +91 XXXX-XXXXXX
+                      {schoolInfo.contact.phone.main}
                     </p>
                   </div>
                 </div>
@@ -65,8 +66,7 @@ export default function Contact() {
                   <div>
                     <h4 className="font-bold text-[#af5f36] mb-1">Email</h4>
                     <p className="text-gray-600">
-                      General: info@snpschool.edu.in<br />
-                      Admissions: admissions@snpschool.edu.in
+                      {schoolInfo.contact.email.general}
                     </p>
                   </div>
                 </div>
@@ -80,9 +80,8 @@ export default function Contact() {
                   <div>
                     <h4 className="font-bold text-[#af5f36] mb-1">Office Hours</h4>
                     <p className="text-gray-600">
-                      Monday - Friday: 8:00 AM - 4:00 PM<br />
-                      Saturday: 9:00 AM - 1:00 PM<br />
-                      Sunday: Closed
+                      Monday - Saturday: {schoolInfo.contact.officeHours.weekdays}<br />
+                      Sunday: {schoolInfo.contact.officeHours.sunday}
                     </p>
                   </div>
                 </div>
