@@ -88,7 +88,7 @@ export default function Facilities() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
         </svg>
       ),
-      image: "https://images.unsplash.com/photo-1567521464027-f127ff144326?q=80&w=800&auto=format&fit=crop"
+      image: "/cafteria.png"
     },
     {
       title: "Medical Room",
