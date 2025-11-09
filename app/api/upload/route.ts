@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
 
+// Configure route to handle larger file uploads
+export const runtime = 'nodejs';
+export const maxDuration = 60; // 60 seconds timeout for large file uploads
+
 // Configure Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
