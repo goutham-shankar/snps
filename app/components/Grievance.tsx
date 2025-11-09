@@ -240,7 +240,7 @@ export default function Grievance() {
               </div>
             </div>
             
-            <div className="bg-gradient-to-br from-[#af5f36] to-[#8b4a28] p-8 md:p-12 text-white flex flex-col justify-center">
+            <div className="bg-linear-to-br from-[#af5f36] to-[#8b4a28] p-8 md:p-12 text-white flex flex-col justify-center">
               <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
@@ -330,9 +330,75 @@ export default function Grievance() {
           </div>
         </div>
 
-        {/* Feedback Form */}
+          {/* Grievance Redressal Mechanism */}
+          <div className="mb-12 md:mb-16">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Grievance Redressal Mechanism</h2>
+            </div>
+
+            <div className="bg-white border border-gray-200 rounded-lg p-6 md:p-8">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Objective</h3>
+                  <p className="text-gray-700 leading-relaxed">Sree Narayana Public School, Chathannoor, ensures a fair, transparent and accessible system for addressing grievances of students, parents, teachers and staff. The mechanism promotes harmony, trust and accountability guided by the values of Sree Narayana Guru.</p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Scope</h3>
+                  <p className="text-gray-700 leading-relaxed">Applies to academic, administrative, disciplinary, financial, infrastructure, safety and staff-related grievances.</p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Grievance Redressal Committee (GRC)</h3>
+                  <p className="text-gray-700 leading-relaxed mb-3">Formed by the School Management Committee.</p>
+                  <ul className="list-disc list-inside space-y-2 text-gray-700">
+                    <li><strong className="text-gray-900">Chairperson:</strong> Principal</li>
+                    <li><strong className="text-gray-900">Convener:</strong> Vice Principal or Headmistress</li>
+                    <li><strong className="text-gray-900">Members:</strong> Senior teacher, parent representative, non-teaching staff representative and student representative (for student issues).</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Procedure</h3>
+                  <p className="text-gray-700 leading-relaxed">Grievances may be submitted in writing or through the school website. Complaints must include name, contact details, nature of grievance, evidence and expected resolution. Anonymous complaints are generally not accepted.</p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Acknowledgement and Inquiry</h3>
+                  <p className="text-gray-700 leading-relaxed">Complaints are acknowledged within three working days. The committee conducts a fair inquiry and submits findings within fifteen working days. Decisions are communicated in writing.</p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Appeal</h3>
+                  <p className="text-gray-700 leading-relaxed">If dissatisfied, an appeal may be made to the Chairperson of the School Management Committee within ten working days. The final decision is issued within fifteen days.</p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Confidentiality</h3>
+                  <p className="text-gray-700 leading-relaxed">All grievances are handled confidentially. Retaliation or breach of privacy invites disciplinary action.</p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Integration</h3>
+                  <p className="text-gray-700 leading-relaxed">Cases under sexual harassment, child protection, or finance are referred to the respective committees.</p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Records and Review</h3>
+                  <p className="text-gray-700 leading-relaxed">Records are maintained for five years. The system is reviewed annually to ensure transparency and effectiveness.</p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">Commitment</h3>
+                  <p className="text-gray-700 leading-relaxed">The school is dedicated to creating a just, respectful, and compassionate environment where every voice is heard.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Feedback Form */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-          <div className="bg-gradient-to-r from-[#af5f36] to-[#8b4a28] p-8 text-white">
+          <div className="bg-linear-to-r from-[#af5f36] to-[#8b4a28] p-8 text-white">
             <h2 className="text-2xl md:text-3xl font-bold mb-2">Submit Your Feedback</h2>
             <p className="text-orange-100">We take every concern seriously and will respond promptly</p>
           </div>

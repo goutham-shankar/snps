@@ -16,12 +16,14 @@
   --gray-600: #4b5563;
   --gray-700: #374151;
   --gray-900: #111827;
+  /* Ensure Tailwind base default font alias points to Poppins */
+  --font-inter: var(--font-poppins);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-poppins);
   --font-heading: var(--font-poppins);
 }
 
@@ -35,7 +37,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-poppins), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {

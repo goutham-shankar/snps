@@ -107,8 +107,9 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Quick Links */}
-        <div className="mt-16 grid md:grid-cols-4 gap-6">
+  {/* Quick Links (hidden) - remove the wrapper's `hidden` class to show these again */}
+  <div className="hidden" aria-hidden="true">
+    <div className="mt-16 grid md:grid-cols-4 gap-6">
           <div className="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-2xl transition-all duration-300">
             <div className="mx-auto w-12 h-12 mb-3 rounded-lg bg-orange-50 text-[#af5f36] flex items-center justify-center">
               <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -146,6 +147,7 @@ export default function Contact() {
             </a>
           </div>
         </div>
+    </div>
       </div>
     </section>
   );

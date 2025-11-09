@@ -48,7 +48,7 @@ export default function SuccessModal({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header with gradient */}
-        <div className="bg-gradient-to-r from-[#af5f36] to-[#8b4a28] p-6 rounded-t-2xl text-white">
+        <div className="bg-linear-to-r from-[#af5f36] to-[#8b4a28] p-6 rounded-t-2xl text-white">
           <div className="flex items-center justify-between mb-4">
             <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto">
               <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -49,7 +49,7 @@ app/
 - **Location**: Chathannoor, Kollam District, Kerala
 - **Pin Code**: 691572 (mentioned in Contact.tsx)
 - **Established**: 2015
-- **Campus Size**: 13 acres
+- **Campus Size**: 14 acres
 - **Affiliation**: CBSE, New Delhi
 - **Grades**: Pre-KG to Grade XII
 - **Managing Body**: Sree Narayana Educational Society
@@ -69,10 +69,10 @@ app/
 - School name: "Sree Narayana Public School"
 - Location: "Chathannoor | CBSE Affiliated"
 - Establishment year: "2015"
-- Campus size: "13 Acres"
+- Campus size: "14 Acres"
 - Stats: 
   - Year Established: 2015
-  - Acres Campus: 13
+  - Acres Campus: 14
   - Students Enrolled: 500+ (placeholder)
   - Board Results: 100% (placeholder)
 - Features descriptions
@@ -91,7 +91,7 @@ app/
 ### **3. Footer Component** (`app/components/Footer.tsx`)
 **Content:**
 - School name: "Sree Narayana Public School"
-- Tagline: "Empowering minds, nurturing values, and shaping future leaders on our 13-acre campus since 2015."
+- Tagline: "Empowering minds, nurturing values, and shaping future leaders on our 14-acre campus since 2015."
 - Location: "Chathannoor, Kollam, Kerala"
 - Phone: "+91 XXXX-XXXXXX" (placeholder)
 - Email: "info@snpschool.edu.in"
@@ -100,10 +100,10 @@ app/
 ### **4. Hero Component** (`app/components/Hero.tsx`)
 **Content:**
 - Slide 1: "Excellence in Holistic Education" / "Nurturing Future Leaders Since 2015"
-- Slide 2: "13 Acres of Eco-Friendly Campus" / "A Safe and Inspiring Learning Environment"
+- Slide 2: "14 Acres of Eco-Friendly Campus" / "A Safe and Inspiring Learning Environment"
 - Slide 3: "CBSE Affiliated Excellence" / "From Pre-KG to Grade XII"
 - Stats:
-  - 13 Acres Campus
+  - 14 Acres Campus
   - 2015 Established
   - CBSE Affiliated
   - 100% Holistic Growth
@@ -114,7 +114,7 @@ app/
 - Establishment: "Since 2015"
 - Managing body: "Sree Narayana Educational Society"
 - Affiliation: "CBSE, New Delhi"
-- Campus: "13-acre eco-friendly campus"
+- Campus: "14-acre eco-friendly campus"
 - Stats:
   - 1000+ Students (placeholder)
   - 60+ Faculty (placeholder)
@@ -157,9 +157,9 @@ app/
 - Admission process descriptions
 - Academic year references (2025-26)
 
-### **9. Facilities Component** (`app/components/Facilities.tsx`)
+-### **9. Facilities Component** (`app/components/Facilities.tsx`)
 **Content:**
-- Campus size: "13 acres"
+- Campus size: "14 acres"
 - Infrastructure descriptions
 - Facility listings
 
@@ -253,7 +253,7 @@ app/
 - Verify exact name and registration details
 
 ### **9. Campus Size Consistency**
-**Current:** "13 acres" appears throughout
+**Current:** "14 acres" appears throughout
 **Files:** Multiple
 **Action:** Verify accuracy and consistency
 
@@ -312,7 +312,7 @@ export const schoolInfo = {
   state: "Kerala",
   pinCode: "691572",
   established: 2015,
-  campusSize: "13 acres",
+  campusSize: "14 acres",
   affiliation: "CBSE, New Delhi",
   affiliationNumber: "", // Add if available
   grades: "Pre-KG to Grade XII",

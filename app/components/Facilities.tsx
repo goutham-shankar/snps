@@ -143,7 +143,7 @@ export default function Facilities() {
               </h1>
               
               <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-6">
-                Our <strong className="text-[#af5f36] font-semibold">13-acre campus</strong> features 
+                Our <strong className="text-[#af5f36] font-semibold">14-acre campus</strong> features 
                 state-of-the-art facilities designed to provide an enriching and 
                 comprehensive learning environment for every student.
               </p>
@@ -203,8 +203,8 @@ export default function Facilities() {
 
         {/* Stats bar - elegant design */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16">
-          {[
-            { value: "13", label: "Acres", sublabel: "Green Campus" },
+            {[
+            { value: "14", label: "Acres", sublabel: "Green Campus" },
             { value: "12+", label: "Facilities", sublabel: "Modern Amenities" },
             { value: "24/7", label: "Security", sublabel: "Safe Environment" },
             { value: "100%", label: "Equipped", sublabel: "Latest Technology" }

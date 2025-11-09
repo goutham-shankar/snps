@@ -13,7 +13,7 @@ export default function Infrastructure() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-20 md:pt-24">
+      <main className="pt-20 md:pt-20">
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4 max-w-7xl">
             <h1 className="text-4xl md:text-5xl font-bold text-[#af5f36] text-center">Infrastructure & Safety</h1>

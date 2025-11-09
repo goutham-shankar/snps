@@ -37,8 +37,8 @@
 
 ---
 
-### **Campus Size: 13 Acres**
-**Current Value:** "13 acres" / "13 Acres"
+### **Campus Size: 14 Acres**
+**Current Value:** "14 acres" / "14 Acres"
 **Files to Update:**
 - `app/page.tsx` (lines 22, 101, 566, 569)
 - `app/components/Hero.tsx` (line 101)
@@ -180,7 +180,7 @@ Kerala, India - 691572
 | Students | 500+ | 1000+ | ⚠️ INCONSISTENT |
 | Faculty | - | 60+ | ⚠️ VERIFY |
 | Board Results | 100% | 100% | ⚠️ VERIFY |
-| Campus Size | 13 Acres | 13 Acre | ✅ Consistent |
+| Campus Size | 14 Acres | 14 Acre | ✅ Consistent |
 | Established | 2015 | 2015 | ✅ Consistent |
 | Years | - | 10+ | ⚠️ VERIFY (dynamic) |
 
@@ -258,8 +258,8 @@ grep -r "XXXX-XXXXXX" app/
 # Find all "2015" references
 grep -r "2015" app/
 
-# Find all "13 acre" references
-grep -ri "13 acre" app/
+# Find all "14 acre" references
+grep -ri "14 acre" app/
 
 # Find all "Chathannoor" references
 grep -ri "chathannoor" app/

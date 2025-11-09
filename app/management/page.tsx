@@ -8,7 +8,7 @@ export default function ManagementPage() {
   return (
     <div className="min-h-screen">
       <Header />
-      <div className="pt-20">
+      <div className="pt-20 md:pt-20">
         <Management />
       </div>
       <Footer />

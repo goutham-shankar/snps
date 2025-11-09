@@ -127,7 +127,7 @@ export default function About() {
                     <p key={index} className="text-base">{paragraph}</p>
                   ))}
                 </div>
-                <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-6 border border-orange-200">
+                <div className="bg-linear-to-br from-orange-50 to-orange-100 rounded-2xl p-6 border border-orange-200">
                   <h3 className="text-lg font-bold text-[#af5f36] mb-3">Our Philosophy</h3>
                   <p className="text-sm text-gray-700 italic mb-4">
                     "{schoolInfo.guruMessage}"
@@ -151,7 +151,7 @@ export default function About() {
         <div className="bg-white rounded-3xl shadow-lg overflow-hidden mb-12 md:mb-16">
           <div className="grid lg:grid-cols-4 gap-0">
             {/* Principal Info */}
-            <div className="lg:col-span-1 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] p-8 flex flex-col justify-center text-white">
+            <div className="lg:col-span-1 bg-linear-to-br from-[#af5f36] to-[#8b4a28] p-8 flex flex-col justify-center text-white">
               <div className="text-center">
                 <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-2 border-white/10">
                   <img

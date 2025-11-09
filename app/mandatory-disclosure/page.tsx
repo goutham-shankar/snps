@@ -42,7 +42,7 @@ export default function MandatoryDisclosure() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-20 md:pt-24">
+      <main className="pt-20 md:pt-20">
         <section className="py-12 md:py-16 bg-gray-50">
           <div className="container mx-auto px-4 max-w-7xl">
             <div className="text-center mb-8 md:mb-12">

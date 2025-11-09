@@ -2,6 +2,13 @@ import schoolInfo from '../data/school-info';
 import Image from 'next/image';
 
 export default function Management() {
+  // Arrange specific roles for the Managing Committee hierarchy
+  const president = schoolInfo.managingCommittee.find(m => m.designation === "President");
+  const secretary = schoolInfo.managingCommittee.find(m => m.designation === "Secretary");
+  const treasurer = schoolInfo.managingCommittee.find(m => m.designation === "Treasurer");
+  const vicePresident = schoolInfo.managingCommittee.find(m => m.designation === "Vice President");
+  const jointSecretary = schoolInfo.managingCommittee.find(m => m.designation === "Joint Secretary");
+
   return (
     <section id="management" className="py-16 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4 max-w-7xl">
@@ -30,85 +37,88 @@ export default function Management() {
 
           {/* Tree Structure */}
           <div className="relative">
-            {/* Managing Committee - Top Level */}
+            {/* Managing Committee - Structured Layout */}
             <div className="text-center mb-8">
               <div className="inline-block bg-[#af5f36] text-white px-6 py-3 rounded-lg font-bold text-lg mb-4">
                 Managing Committee
               </div>
-              
-              <div className="grid md:grid-cols-5 gap-4 max-w-5xl mx-auto">
-                {schoolInfo.managingCommittee.map((member, index) => (
-                  <div key={index} className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 text-center">
-                    {member.designation === "President" ? (
-                      <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
-                        <Image
-                          src="/president.jpg"
-                          alt={member.name}
-                          width={64}
-                          height={64}
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
-                    ) : member.designation === "Vice President" ? (
-                      <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
-                        <Image
-                          src="/vicepresident.png"
-                          alt={member.name}
-                          width={64}
-                          height={64}
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
-                    ) : member.designation === "Secretary" ? (
-                      <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
-                        <Image
-                          src="/secretary.png"
-                          alt={member.name}
-                          width={64}
-                          height={64}
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
-                    ) : member.designation === "Joint Secretary" ? (
-                      <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
-                        <Image
-                          src="/jointsec.png"
-                          alt={member.name}
-                          width={64}
-                          height={64}
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
-                    ) : member.designation === "Treasurer" ? (
-                      <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
-                        <Image
-                          src="/treasurer.png"
-                          alt={member.name}
-                          width={64}
-                          height={64}
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-12 h-12 bg-[#af5f36] rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold text-sm">
-                        {member.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
-                      </div>
-                    )}
-                    <h4 className="font-bold text-[#af5f36] text-sm">{member.designation}</h4>
-                    <p className="text-gray-700 text-xs font-medium">{member.name}</p>
+
+              {/* Row 1: President | Secretary */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-6">
+                {president && (
+                  <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 text-center">
+                    <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
+                      <Image src="/president.jpg" alt={president.name} width={64} height={64} className="object-cover w-full h-full" />
+                    </div>
+                    <h4 className="font-bold text-[#af5f36] text-sm">President</h4>
+                    <p className="text-gray-700 text-xs font-medium">{president.name}</p>
                   </div>
-                ))}
+                )}
+                {secretary && (
+                  <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 text-center">
+                    <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
+                      <Image src="/secretary.png" alt={secretary.name} width={64} height={64} className="object-cover w-full h-full" />
+                    </div>
+                    <h4 className="font-bold text-[#af5f36] text-sm">Secretary</h4>
+                    <p className="text-gray-700 text-xs font-medium">{secretary.name}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Vertical Connector */}
+              <div className="flex justify-center my-6">
+                <div className="w-0.5 h-8 bg-gray-400"></div>
+              </div>
+
+              {/* Row 2: Treasurer */}
+              {treasurer && (
+                <div className="max-w-sm mx-auto mb-6">
+                  <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 text-center">
+                    <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
+                      <Image src="/treasurer.png" alt={treasurer.name} width={64} height={64} className="object-cover w-full h-full" />
+                    </div>
+                    <h4 className="font-bold text-[#af5f36] text-sm">Treasurer</h4>
+                    <p className="text-gray-700 text-xs font-medium">{treasurer.name}</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Vertical Connector */}
+              <div className="flex justify-center my-6">
+                <div className="w-0.5 h-8 bg-gray-400"></div>
+              </div>
+
+              {/* Row 3: Vice President | Joint Secretary */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                {vicePresident && (
+                  <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 text-center">
+                    <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
+                      <Image src="/vicepresident.png" alt={vicePresident.name} width={64} height={64} className="object-cover w-full h-full" />
+                    </div>
+                    <h4 className="font-bold text-[#af5f36] text-sm">Vice President</h4>
+                    <p className="text-gray-700 text-xs font-medium">{vicePresident.name}</p>
+                  </div>
+                )}
+                {jointSecretary && (
+                  <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 text-center">
+                    <div className="w-16 h-16 rounded-full mx-auto mb-2 overflow-hidden border-2 border-[#af5f36] shadow-lg">
+                      <Image src="/jointsec.png" alt={jointSecretary.name} width={64} height={64} className="object-cover w-full h-full" />
+                    </div>
+                    <h4 className="font-bold text-[#af5f36] text-sm">Joint Secretary</h4>
+                    <p className="text-gray-700 text-xs font-medium">{jointSecretary.name}</p>
+                  </div>
+                )}
               </div>
             </div>
 
             {/* Connection Line */}
-            <div className="flex justify-center mb-6">
-              <div className="w-px h-8 bg-gray-300"></div>
+            <div className="flex justify-center my-6">
+              <div className="w-0.5 h-8 bg-gray-400"></div>
             </div>
 
             {/* Principal Level */}
             <div className="text-center mb-8">
-              <div className="inline-block bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-lg p-6 shadow-lg text-white">
+              <div className="inline-block bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-lg p-6 shadow-lg text-white">
                 <div className="w-16 h-16 rounded-full mx-auto mb-3 overflow-hidden border-2 border-white/20 shadow-lg">
                   <Image
                     src="/PRINCI.jpg"
@@ -125,21 +135,21 @@ export default function Management() {
             </div>
 
             {/* Connection Lines to Departments */}
-            <div className="flex justify-center mb-6">
-              <div className="w-px h-8 bg-gray-300"></div>
+            <div className="flex justify-center my-4">
+              <div className="w-0.5 h-8 bg-gray-400"></div>
             </div>
-            <div className="flex justify-center mb-6">
-              <div className="w-64 h-px bg-gray-300"></div>
+            <div className="flex justify-center my-4">
+              <div className="w-80 h-0.5 bg-gray-400"></div>
             </div>
-            <div className="grid grid-cols-3 gap-8 mb-6">
+            <div className="grid grid-cols-3 gap-8 my-4">
               <div className="flex justify-center">
-                <div className="w-px h-8 bg-gray-300"></div>
+                <div className="w-0.5 h-8 bg-gray-400"></div>
               </div>
               <div className="flex justify-center">
-                <div className="w-px h-8 bg-gray-300"></div>
+                <div className="w-0.5 h-8 bg-gray-400"></div>
               </div>
               <div className="flex justify-center">
-                <div className="w-px h-8 bg-gray-300"></div>
+                <div className="w-0.5 h-8 bg-gray-400"></div>
               </div>
             </div>
 
@@ -187,26 +197,25 @@ export default function Management() {
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Executive Committee</h2>
             <p className="text-gray-600">Distinguished members guiding our educational mission</p>
           </div>
-          
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {schoolInfo.executiveCommittee.map((member, index) => (
-              <div key={member.id} className="bg-gray-50 border border-gray-200 rounded-lg p-4 hover:bg-gray-100 transition-colors">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#af5f36] rounded-full flex items-center justify-center text-white font-bold text-sm">
-                    {member.id}
-                  </div>
-                  <div>
-                    <p className="text-gray-800 font-semibold text-sm">{member.name}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
+          {/* Executive Committee Image */}
+          <div className="mb-8">
+            <div className="relative rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+              <Image
+                src="/management.jpg"
+                alt="Executive Committee"
+                width={1200}
+                height={600}
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+                className="w-full h-auto object-cover"
+              />
+            </div>
           </div>
+          {/* Member grid removed per request */}
         </div>
 
         {/* Faculty Directory */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-12">
-          <div className="bg-gradient-to-r from-[#af5f36] to-[#8b4a28] p-6 text-white">
+          <div className="bg-linear-to-r from-[#af5f36] to-[#8b4a28] p-6 text-white">
             <h2 className="text-2xl font-bold mb-2">Faculty Directory</h2>
             <p className="text-orange-100">Our dedicated teaching professionals</p>
             

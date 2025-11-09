@@ -8,7 +8,7 @@ export default function GrievancePage() {
   return (
     <div className="min-h-screen">
       <Header />
-      <div className="pt-20 md:pt-24">
+      <div className="pt-20 md:pt-10">
         <Grievance />
       </div>
       <Footer />
