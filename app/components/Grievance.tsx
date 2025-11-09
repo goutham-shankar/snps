@@ -29,10 +29,18 @@ export default function Grievance() {
       formDataToSend.append('email', formData.email);
       formDataToSend.append('phone', formData.phone);
       formDataToSend.append('category', formData.category);
-      formDataToSend.append('subject', formData.subject);
-      formDataToSend.append('description', formData.description);
       formDataToSend.append('priority', formData.priority);
-      formDataToSend.append('message', `Feedback/Complaint Submission\n\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nCategory: ${formData.category}\nPriority: ${formData.priority}\nSubject: ${formData.subject}\n\nDescription:\n${formData.description}`);
+      
+      // Create comprehensive subject line with category and priority
+      const emailSubject = formData.category && formData.priority
+        ? `[${formData.priority.toUpperCase()}] ${formData.category} - ${formData.subject}`
+        : formData.subject || 'Feedback/Complaint Submission';
+      
+      formDataToSend.append('subject', emailSubject);
+      formDataToSend.append('description', formData.description);
+      
+      // Create detailed message body
+      formDataToSend.append('message', `Feedback/Complaint Submission\n\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || 'Not provided'}\nCategory: ${formData.category}\nPriority: ${formData.priority}\nSubject: ${formData.subject}\n\nDescription:\n${formData.description}`);
       
       // Add Web3Forms access key
       formDataToSend.append('access_key', '0fb3d977-2f38-40dc-93e2-68d6e162ba8b');
