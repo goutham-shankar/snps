@@ -153,10 +153,14 @@ export default function About() {
             {/* Principal Info */}
             <div className="lg:col-span-1 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] p-8 flex flex-col justify-center text-white">
               <div className="text-center">
-                <div className="w-24 h-24 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
+                <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-2 border-white/10">
+                  <img
+                    src={`/PRINCI.jpg`}
+                    alt={`${schoolInfo.principal.name} - Principal`}
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                    decoding="async"
+                  />
                 </div>
                 <h3 className="text-xl font-bold mb-2">{schoolInfo.principal.name}</h3>
                 <p className="text-orange-200 text-sm">{schoolInfo.principal.title}</p>
