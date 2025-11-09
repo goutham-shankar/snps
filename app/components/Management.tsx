@@ -45,20 +45,11 @@ export default function Management() {
                 <div className="group relative">
                   <div className="absolute inset-0 bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
                   <div className="relative bg-white border-2 border-orange-200 rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#af5f36] text-white px-4 py-1 rounded-full text-sm font-bold shadow-md">
-                      President
-                    </div>
-                    <div className="w-28 h-28 rounded-full mx-auto mt-4 mb-4 overflow-hidden border-4 border-[#af5f36] shadow-xl ring-4 ring-orange-100">
+                    <div className="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden border-4 border-[#af5f36] shadow-xl ring-4 ring-orange-100">
                       <Image src="/president.jpg" alt={president.name} width={112} height={112} className="object-cover w-full h-full" />
                     </div>
                     <h4 className="text-xl font-bold text-gray-900 text-center mb-1">{president.name}</h4>
-                    <div className="flex items-center justify-center gap-2 text-[#af5f36]">
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                      </svg>
-                      <span className="text-sm">Leadership Head</span>
-                    </div>
+                    <p className="text-sm text-[#af5f36] text-center font-medium">President</p>
                   </div>
                 </div>
               )}
@@ -66,19 +57,11 @@ export default function Management() {
                 <div className="group relative">
                   <div className="absolute inset-0 bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
                   <div className="relative bg-white border-2 border-orange-200 rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#af5f36] text-white px-4 py-1 rounded-full text-sm font-bold shadow-md">
-                      Secretary
-                    </div>
-                    <div className="w-28 h-28 rounded-full mx-auto mt-4 mb-4 overflow-hidden border-4 border-[#af5f36] shadow-xl ring-4 ring-orange-100">
+                    <div className="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden border-4 border-[#af5f36] shadow-xl ring-4 ring-orange-100">
                       <Image src="/secretary.png" alt={secretary.name} width={112} height={112} className="object-cover w-full h-full" />
                     </div>
                     <h4 className="text-xl font-bold text-gray-900 text-center mb-1">{secretary.name}</h4>
-                    <div className="flex items-center justify-center gap-2 text-[#af5f36]">
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-sm">Administrative Head</span>
-                    </div>
+                    <p className="text-sm text-[#af5f36] text-center font-medium">Secretary</p>
                   </div>
                 </div>
               )}
@@ -99,20 +82,11 @@ export default function Management() {
                 <div className="group relative">
                   <div className="absolute inset-0 bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
                   <div className="relative bg-white border-2 border-orange-200 rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#8b4a28] text-white px-4 py-1 rounded-full text-sm font-bold shadow-md">
-                      Treasurer
-                    </div>
-                    <div className="w-28 h-28 rounded-full mx-auto mt-4 mb-4 overflow-hidden border-4 border-[#8b4a28] shadow-xl ring-4 ring-orange-100">
+                    <div className="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden border-4 border-[#8b4a28] shadow-xl ring-4 ring-orange-100">
                       <Image src="/treasurer.png" alt={treasurer.name} width={112} height={112} className="object-cover w-full h-full" />
                     </div>
                     <h4 className="text-xl font-bold text-gray-900 text-center mb-1">{treasurer.name}</h4>
-                    <div className="flex items-center justify-center gap-2 text-[#8b4a28]">
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-sm">Financial Head</span>
-                    </div>
+                    <p className="text-sm text-[#8b4a28] text-center font-medium">Treasurer</p>
                   </div>
                 </div>
               </div>
@@ -133,14 +107,11 @@ export default function Management() {
                 <div className="group relative">
                   <div className="absolute inset-0 bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-2xl blur opacity-15 group-hover:opacity-30 transition-opacity"></div>
                   <div className="relative bg-white border-2 border-orange-200 rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#8b4a28] text-white px-4 py-1 rounded-full text-sm font-bold shadow-md">
-                      Vice President
-                    </div>
-                    <div className="w-24 h-24 rounded-full mx-auto mt-4 mb-4 overflow-hidden border-4 border-[#8b4a28] shadow-xl ring-4 ring-orange-100">
+                    <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-4 border-[#8b4a28] shadow-xl ring-4 ring-orange-100">
                       <Image src="/vicepresident.png" alt={vicePresident.name} width={96} height={96} className="object-cover w-full h-full" />
                     </div>
                     <h4 className="text-lg font-bold text-gray-900 text-center mb-1">{vicePresident.name}</h4>
-                    <p className="text-sm text-gray-600 text-center">Support Leadership</p>
+                    <p className="text-sm text-[#8b4a28] text-center font-medium">Vice President</p>
                   </div>
                 </div>
               )}
@@ -148,14 +119,11 @@ export default function Management() {
                 <div className="group relative">
                   <div className="absolute inset-0 bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-2xl blur opacity-15 group-hover:opacity-30 transition-opacity"></div>
                   <div className="relative bg-white border-2 border-orange-200 rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#8b4a28] text-white px-4 py-1 rounded-full text-sm font-bold shadow-md">
-                      Joint Secretary
-                    </div>
-                    <div className="w-24 h-24 rounded-full mx-auto mt-4 mb-4 overflow-hidden border-4 border-[#8b4a28] shadow-xl ring-4 ring-orange-100">
+                    <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-4 border-[#8b4a28] shadow-xl ring-4 ring-orange-100">
                       <Image src="/jointsec.png" alt={jointSecretary.name} width={96} height={96} className="object-cover w-full h-full" />
                     </div>
                     <h4 className="text-lg font-bold text-gray-900 text-center mb-1">{jointSecretary.name}</h4>
-                    <p className="text-sm text-gray-600 text-center">Administrative Support</p>
+                    <p className="text-sm text-[#8b4a28] text-center font-medium">Joint Secretary</p>
                   </div>
                 </div>
               )}
@@ -175,13 +143,7 @@ export default function Management() {
               <div className="inline-block relative group">
                 <div className="absolute inset-0 bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-3xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity"></div>
                 <div className="relative bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-3xl p-8 shadow-2xl text-white">
-                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-yellow-400 text-[#8b4a28] px-6 py-2 rounded-full text-sm font-bold shadow-lg flex items-center gap-2">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                    Principal
-                  </div>
-                  <div className="w-32 h-32 rounded-full mx-auto mb-4 mt-2 overflow-hidden border-4 border-white shadow-2xl ring-4 ring-orange-300">
+                  <div className="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden border-4 border-white shadow-2xl ring-4 ring-orange-300">
                     <Image
                       src="/PRINCI.jpg"
                       alt={`${schoolInfo.principal.name} - Principal`}
@@ -191,7 +153,7 @@ export default function Management() {
                     />
                   </div>
                   <h3 className="font-bold text-2xl mb-1">{schoolInfo.principal.name}</h3>
-                  <p className="text-orange-200 font-semibold text-lg mb-2">{schoolInfo.principal.title}</p>
+                  <p className="text-orange-200 font-semibold text-lg mb-2">Principal</p>
                   <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
