@@ -8,10 +8,9 @@ export default function Hero() {
 
   const slides = [
     {
-      title: "Excellence in Holistic Education",
+      title: "Welcome to SNPS",
       subtitle: "Nurturing Future Leaders Since 2015",
-      imageUrl: "/schooimg/SCHOOL.JPG",
-      fallbackUrl: "/schooimg/IMG-20251102-WA0154.jpg",
+      imageUrl: "/SCHOOL.JPG",
     },
     {
       title: "14 Acres of Eco-Friendly Campus",
@@ -21,7 +20,7 @@ export default function Hero() {
     {
       title: "CBSE Affiliated Excellence",
       subtitle: "From Pre-KG to Grade XII",
-      imageUrl: "/schooimg/IMG_20251108_120800.jpg",
+      imageUrl: "/schooimg/SCHOOL.JPG",
     },
   ];
 

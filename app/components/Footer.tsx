@@ -63,7 +63,6 @@ export default function Footer() {
               <li><Link href="/academics" className="text-gray-400 hover:text-[#af5f36] transition-colors hover:translate-x-1 inline-block text-sm">Academics</Link></li>
               <li><Link href="/facilities" className="text-gray-400 hover:text-[#af5f36] transition-colors hover:translate-x-1 inline-block text-sm">Facilities</Link></li>
               <li><Link href="/gallery" className="text-gray-400 hover:text-[#af5f36] transition-colors hover:translate-x-1 inline-block text-sm">Gallery</Link></li>
-              <li><Link href="/achievements" className="text-gray-400 hover:text-[#af5f36] transition-colors hover:translate-x-1 inline-block text-sm">Achievements</Link></li>
             </ul>
           </div>
 
@@ -88,10 +87,7 @@ export default function Footer() {
               Important
             </h4>
             <ul className="space-y-3">
-              <li><Link href="/mandatory-disclosure" className="text-gray-400 hover:text-[#af5f36] transition-colors hover:translate-x-1 inline-block text-sm">Mandatory Disclosure</Link></li>
               <li><Link href="/policies" className="text-gray-400 hover:text-[#af5f36] transition-colors hover:translate-x-1 inline-block text-sm">Policies</Link></li>
-              <li><Link href="/governance" className="text-gray-400 hover:text-[#af5f36] transition-colors hover:translate-x-1 inline-block text-sm">Governance</Link></li>
-              <li><Link href="/compliance" className="text-gray-400 hover:text-[#af5f36] transition-colors hover:translate-x-1 inline-block text-sm">Compliance</Link></li>
               <li><Link href="/grievance" className="text-gray-400 hover:text-[#af5f36] transition-colors hover:translate-x-1 inline-block text-sm">Grievance Redressal</Link></li>
             </ul>
           </div>

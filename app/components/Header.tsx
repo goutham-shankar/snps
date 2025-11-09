@@ -50,8 +50,7 @@ export default function Header() {
           href: '/academics',
           subDropdown: [
             { label: 'Programs', href: '/academics' },
-            { label: 'Calendar', href: '/calendar' },
-            { label: 'Results', href: '/results' }
+            { label: 'Calendar', href: '/calendar' }
           ]
         }
       ]
@@ -74,9 +73,8 @@ export default function Header() {
     },
     { 
       label: 'Information', 
-      href: '/mandatory-disclosure',
+      href: '/policies',
       dropdown: [
-        { label: 'Mandatory Disclosure', href: '/mandatory-disclosure' },
         { label: 'Policies', href: '/policies' }
       ]
     },
