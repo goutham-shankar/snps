@@ -28,6 +28,26 @@ export default function Management() {
           </p>
         </div>
 
+        {/* About Sree Narayana Educational Society */}
+        <div className="bg-white rounded-3xl shadow-xl p-8 md:p-10 mb-12 border border-orange-100">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#af5f36] mb-2">
+              SREE NARAYANA EDUCATIONAL SOCIETY, KOLLAM
+            </h2>
+            <div className="w-20 h-1 bg-[#af5f36] mx-auto"></div>
+          </div>
+          
+          <div className="max-w-5xl mx-auto text-gray-700 space-y-4">
+            <p className="text-justify leading-relaxed">
+              The Sree Narayana Educational Society, Kollam, established in 1986, stands as a beacon of educational excellence, inspired by Sree Narayana Guru's timeless ideal — "Enlighten through Education." Under the visionary leadership of Er. Mr. Anidharan M. L. and Prof. K. Sasikumar, the Society manages several distinguished CBSE institutions and colleges affiliated with the University of Kerala, embodying our enduring commitment to academic excellence and ethical education.
+            </p>
+            
+            <p className="text-justify leading-relaxed">
+              Among our institutions, Sree Narayana Public School, Chathannoor, occupies a special place. Nestled in a serene environment, it provides the ideal setting for holistic growth. The Society envisions elevating this school into an internationally recognized center of learning, with a long-term aspiration to develop it into a Sainik School, fostering discipline, leadership and patriotism in young minds.
+            </p>
+          </div>
+        </div>
+
         {/* Organizational Tree Structure */}
         <div className="bg-linear-to-br from-orange-50 to-white rounded-3xl shadow-xl p-8 md:p-12 mb-12 border border-orange-100">
           <div className="text-center mb-12">
