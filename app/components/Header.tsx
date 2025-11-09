@@ -77,9 +77,7 @@ export default function Header() {
       href: '/mandatory-disclosure',
       dropdown: [
         { label: 'Mandatory Disclosure', href: '/mandatory-disclosure' },
-        { label: 'Policies', href: '/policies' },
-        { label: 'Governance', href: '/governance' },
-        { label: 'Compliance', href: '/compliance' }
+        { label: 'Policies', href: '/policies' }
       ]
     },
     { 
