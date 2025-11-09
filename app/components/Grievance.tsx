@@ -42,8 +42,9 @@ export default function Grievance() {
       // Create detailed message body
       formDataToSend.append('message', `Feedback/Complaint Submission\n\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || 'Not provided'}\nCategory: ${formData.category}\nPriority: ${formData.priority}\nSubject: ${formData.subject}\n\nDescription:\n${formData.description}`);
       
-      // Add Web3Forms access key
-      formDataToSend.append('access_key', '0fb3d977-2f38-40dc-93e2-68d6e162ba8b');
+      // Add Web3Forms access key from environment variable
+      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_GRIEVANCE_KEY || '0fb3d977-2f38-40dc-93e2-68d6e162ba8b';
+      formDataToSend.append('access_key', accessKey);
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',

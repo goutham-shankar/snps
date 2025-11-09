@@ -14,14 +14,78 @@ export default function Admission() {
     phone: '',
     address: ''
   });
+  const [transferCertificate, setTransferCertificate] = useState<File | null>(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [isUploading, setIsUploading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Validate file type
+      const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+      if (!allowedTypes.includes(file.type)) {
+        alert('Invalid file type. Please upload a PDF or image file (JPG, PNG, WebP).');
+        return;
+      }
+      // Validate file size (10MB)
+      if (file.size > 10 * 1024 * 1024) {
+        alert('File size exceeds 10MB limit. Please upload a smaller file.');
+        return;
+      }
+      setTransferCertificate(file);
+    }
+  };
+
+  const uploadToCloudinary = async (file: File): Promise<string> => {
+    setIsUploading(true);
+    setUploadProgress(0);
+
+    try {
+      const uploadFormData = new FormData();
+      uploadFormData.append('file', file);
+
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: uploadFormData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Upload failed');
+      }
+
+      const data = await response.json();
+      setUploadProgress(100);
+      return data.url;
+    } catch (error: any) {
+      console.error('Cloudinary upload error:', error);
+      throw error;
+    } finally {
+      setIsUploading(false);
+      setUploadProgress(0);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
+      let tcUrl = '';
+      
+      // Upload Transfer Certificate if provided
+      if (transferCertificate) {
+        try {
+          tcUrl = await uploadToCloudinary(transferCertificate);
+        } catch (error: any) {
+          alert(`Failed to upload Transfer Certificate: ${error.message}. Please try again or submit without it.`);
+          setIsSubmitting(false);
+          return;
+        }
+      }
+
       const formDataToSend = new FormData();
       
       // Add form fields
@@ -32,11 +96,20 @@ export default function Admission() {
       formDataToSend.append('email', formData.email);
       formDataToSend.append('phone', formData.phone);
       formDataToSend.append('address', formData.address);
-      formDataToSend.append('subject', `Admission Inquiry - ${formData.studentName} - Grade ${formData.grade}`);
-      formDataToSend.append('message', `Admission Inquiry Form Submission\n\nStudent Name: ${formData.studentName}\nDate of Birth: ${formData.dob}\nGrade Applying For: ${formData.grade}\nParent/Guardian Name: ${formData.parentName}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nAddress: ${formData.address}`);
       
-      // Add Web3Forms access key
-      formDataToSend.append('access_key', '869c90ba-d102-4a67-96d4-c7ca37ceeb90');
+      // Add TC link if uploaded
+      if (tcUrl) {
+        formDataToSend.append('transferCertificate', tcUrl);
+      }
+      
+      const messageContent = `Admission Inquiry Form Submission\n\nStudent Name: ${formData.studentName}\nDate of Birth: ${formData.dob}\nGrade Applying For: ${formData.grade}\nParent/Guardian Name: ${formData.parentName}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nAddress: ${formData.address}${tcUrl ? `\n\nTransfer Certificate: ${tcUrl}` : '\n\nTransfer Certificate: Not provided'}`;
+      
+      formDataToSend.append('subject', `Admission Inquiry - ${formData.studentName} - Grade ${formData.grade}`);
+      formDataToSend.append('message', messageContent);
+      
+      // Add Web3Forms access key from environment variable
+      const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ADMISSION_KEY || '869c90ba-d102-4a67-96d4-c7ca37ceeb90';
+      formDataToSend.append('access_key', accessKey);
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -56,6 +129,10 @@ export default function Admission() {
           phone: '',
           address: ''
         });
+        setTransferCertificate(null);
+        // Reset file input
+        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+        if (fileInput) fileInput.value = '';
         // Show success modal
         setShowSuccessModal(true);
       } else {
@@ -300,13 +377,80 @@ export default function Admission() {
                     placeholder="Enter your complete address"
                   />
                 </div>
+
+                {/* Transfer Certificate Upload */}
+                <div>
+                  <label className="block text-gray-800 font-semibold mb-2">
+                    Transfer Certificate (TC) {transferCertificate && <span className="text-green-600 text-sm">✓ Uploaded</span>}
+                  </label>
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-[#af5f36] transition-colors">
+                    <input
+                      type="file"
+                      accept=".pdf,.jpg,.jpeg,.png,.webp"
+                      onChange={handleFileChange}
+                      disabled={isUploading || isSubmitting}
+                      className="hidden"
+                      id="tc-upload"
+                    />
+                    <label
+                      htmlFor="tc-upload"
+                      className={`flex flex-col items-center justify-center cursor-pointer ${isUploading || isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    >
+                      <svg className="w-12 h-12 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                      </svg>
+                      <p className="text-sm text-gray-600 mb-1">
+                        {transferCertificate ? transferCertificate.name : 'Click to upload or drag and drop'}
+                      </p>
+                      <p className="text-xs text-gray-500">PDF, JPG, PNG or WebP (MAX. 10MB)</p>
+                    </label>
+                  </div>
+                  {isUploading && (
+                    <div className="mt-2">
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div
+                          className="bg-[#af5f36] h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${uploadProgress}%` }}
+                        ></div>
+                      </div>
+                      <p className="text-xs text-gray-600 mt-1">Uploading... {uploadProgress}%</p>
+                    </div>
+                  )}
+                  {transferCertificate && !isUploading && (
+                    <div className="mt-2 flex items-center gap-2 text-sm text-green-600">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>File ready: {transferCertificate.name}</span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setTransferCertificate(null);
+                          const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+                          if (fileInput) fileInput.value = '';
+                        }}
+                        className="ml-auto text-red-600 hover:text-red-800 text-xs"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  )}
+                </div>
                 
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isUploading}
                   className="w-full bg-[#af5f36] hover:bg-[#8b4a28] disabled:bg-gray-400 disabled:cursor-not-allowed text-white py-4 px-6 rounded-lg font-bold text-lg transition-colors flex items-center justify-center gap-2"
                 >
-                  {isSubmitting ? (
+                  {isUploading ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Uploading TC...
+                    </>
+                  ) : isSubmitting ? (
                     <>
                       <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
