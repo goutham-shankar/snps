@@ -1,6 +1,6 @@
 
 # 🏫 Sree Narayana Public School Website   
-    
+       
 **"Enlightenment through Education"**
 
 A modern, responsive website for Sree Narayana Public School, Chathannoor – Vilappuram, Kerala. Built with Next.js 16, React 19, and Tailwind CSS 4.
