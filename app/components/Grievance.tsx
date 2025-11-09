@@ -33,8 +33,10 @@ export default function Grievance() {
       
       // Create comprehensive subject line with category and priority
       const emailSubject = formData.category && formData.priority
-        ? `[${formData.priority.toUpperCase()}] ${formData.category} - ${formData.subject}`
-        : formData.subject || 'Feedback/Complaint Submission';
+        ? `Grievance Submission - [${formData.priority.toUpperCase()}] ${formData.category} - ${formData.subject}`
+        : formData.subject 
+          ? `Grievance Submission - ${formData.subject}`
+          : 'Grievance Submission - Feedback/Complaint';
       
       formDataToSend.append('subject', emailSubject);
       formDataToSend.append('description', formData.description);

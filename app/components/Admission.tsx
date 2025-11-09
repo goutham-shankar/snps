@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import schoolInfo from '../data/school-info';
 import SuccessModal from './SuccessModal';
+import ErrorModal from './ErrorModal';
 
 export default function Admission() {
   const [formData, setFormData] = useState({
@@ -19,6 +20,10 @@ export default function Admission() {
   const [isUploading, setIsUploading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState<{ isOpen: boolean; message: string }>({
+    isOpen: false,
+    message: ''
+  });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -26,12 +31,24 @@ export default function Admission() {
       // Validate file type
       const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
       if (!allowedTypes.includes(file.type)) {
-        alert('Invalid file type. Please upload a PDF or image file (JPG, PNG, WebP).');
+        setErrorModal({
+          isOpen: true,
+          message: 'Invalid file type. Please upload a PDF or image file (JPG, PNG, or WebP).'
+        });
+        // Reset file input
+        e.target.value = '';
         return;
       }
       // Validate file size (10MB)
-      if (file.size > 10 * 1024 * 1024) {
-        alert('File size exceeds 10MB limit. Please upload a smaller file.');
+      const maxSize = 10 * 1024 * 1024; // 10MB
+      if (file.size > maxSize) {
+        const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+        setErrorModal({
+          isOpen: true,
+          message: `File size (${fileSizeMB}MB) exceeds the 10MB limit. Please compress the image or use a smaller file.`
+        });
+        // Reset file input
+        e.target.value = '';
         return;
       }
       setTransferCertificate(file);
@@ -51,9 +68,32 @@ export default function Admission() {
         body: uploadFormData,
       });
 
+      // Handle different response statuses
+      if (response.status === 413) {
+        // File too large
+        let errorMessage = 'File size is too large. Please upload a file smaller than 10MB.';
+        try {
+          const errorData = await response.json();
+          if (errorData.error) {
+            errorMessage = errorData.error;
+          }
+        } catch {
+          // If response is not JSON, use default message
+        }
+        throw new Error(errorMessage);
+      }
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Upload failed');
+        let errorMessage = 'Failed to upload file. Please try again.';
+        try {
+          const errorData = await response.json();
+          if (errorData.error) {
+            errorMessage = errorData.error;
+          }
+        } catch {
+          // If response is not JSON, use default message
+        }
+        throw new Error(errorMessage);
       }
 
       const data = await response.json();
@@ -80,7 +120,11 @@ export default function Admission() {
         try {
           tcUrl = await uploadToCloudinary(transferCertificate);
         } catch (error: any) {
-          alert(`Failed to upload Transfer Certificate: ${error.message}. Please try again or submit without it.`);
+          // Show user-friendly error modal
+          setErrorModal({
+            isOpen: true,
+            message: error.message || 'Failed to upload Transfer Certificate. You can submit the form without it, or try uploading a smaller file (under 10MB).'
+          });
           setIsSubmitting(false);
           return;
         }
@@ -557,6 +601,15 @@ export default function Admission() {
           isOpen={showSuccessModal}
           onClose={() => setShowSuccessModal(false)}
           type="admission"
+        />
+
+        {/* Error Modal */}
+        <ErrorModal
+          isOpen={errorModal.isOpen}
+          onClose={() => setErrorModal({ isOpen: false, message: '' })}
+          title="Upload Error"
+          message={errorModal.message}
+          type="error"
         />
       </div>
     </section>

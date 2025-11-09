@@ -10,12 +10,26 @@ cloudinary.config({
 
 export async function POST(request: NextRequest) {
   try {
+    // Check content length first to handle large files before parsing
+    const contentLength = request.headers.get('content-length');
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    
+    if (contentLength && parseInt(contentLength) > maxSize) {
+      return NextResponse.json(
+        { 
+          error: 'File size is too large. Please upload a file smaller than 10MB. You can compress the image or use a PDF instead.',
+          code: 'FILE_TOO_LARGE'
+        },
+        { status: 413 }
+      );
+    }
+
     const formData = await request.formData();
     const file = formData.get('file') as File;
 
     if (!file) {
       return NextResponse.json(
-        { error: 'No file provided' },
+        { error: 'No file provided. Please select a file to upload.' },
         { status: 400 }
       );
     }
@@ -31,17 +45,20 @@ export async function POST(request: NextRequest) {
     
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json(
-        { error: 'Invalid file type. Only PDF and images are allowed.' },
+        { error: 'Invalid file type. Please upload a PDF or image file (JPG, PNG, or WebP).' },
         { status: 400 }
       );
     }
 
-    // Validate file size (max 10MB)
-    const maxSize = 10 * 1024 * 1024; // 10MB
+    // Validate file size (max 10MB) - double check after parsing
     if (file.size > maxSize) {
+      const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
       return NextResponse.json(
-        { error: 'File size exceeds 10MB limit.' },
-        { status: 400 }
+        { 
+          error: `File size (${fileSizeMB}MB) exceeds the 10MB limit. Please compress the image or use a smaller file.`,
+          code: 'FILE_TOO_LARGE'
+        },
+        { status: 413 }
       );
     }
 
@@ -76,8 +93,30 @@ export async function POST(request: NextRequest) {
     });
   } catch (error: any) {
     console.error('Cloudinary upload error:', error);
+    
+    // Handle specific error types
+    if (error.message && error.message.includes('File size')) {
+      return NextResponse.json(
+        { 
+          error: 'File size is too large. Please upload a file smaller than 10MB.',
+          code: 'FILE_TOO_LARGE'
+        },
+        { status: 413 }
+      );
+    }
+    
+    if (error.http_code === 400 || error.message?.includes('Invalid')) {
+      return NextResponse.json(
+        { error: 'Invalid file format. Please upload a PDF or image file.' },
+        { status: 400 }
+      );
+    }
+    
     return NextResponse.json(
-      { error: error.message || 'Failed to upload file' },
+      { 
+        error: 'Failed to upload file. Please check your internet connection and try again, or submit the form without the file.',
+        code: 'UPLOAD_FAILED'
+      },
       { status: 500 }
     );
   }
