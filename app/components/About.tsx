@@ -147,51 +147,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* Principal's Message - Redesigned */}
-        <div className="bg-white rounded-3xl shadow-lg overflow-hidden mb-12 md:mb-16">
-          <div className="grid lg:grid-cols-4 gap-0">
-            {/* Principal Info */}
-            <div className="lg:col-span-1 bg-linear-to-br from-[#af5f36] to-[#8b4a28] p-8 flex flex-col justify-center text-white">
-              <div className="text-center">
-                <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-2 border-white/10">
-                  <img
-                    src={`/PRINCI.jpg`}
-                    alt={`${schoolInfo.principal.name} - Principal`}
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                    decoding="async"
-                  />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{schoolInfo.principal.name}</h3>
-                <p className="text-orange-200 text-sm">{schoolInfo.principal.title}</p>
-                <p className="text-orange-100 text-xs mt-1">{schoolInfo.specialStatus}</p>
-              </div>
-            </div>
-            
-            {/* Message Content */}
-            <div className="lg:col-span-3 p-8 md:p-12">
-              <div className="inline-flex items-center gap-2 mb-6">
-                <div className="w-1 h-8 bg-[#af5f36] rounded-full"></div>
-                <span className="text-sm font-semibold tracking-wider uppercase text-[#af5f36]">
-                  Principal's Message
-                </span>
-              </div>
-              
-              <div className="text-gray-700 leading-relaxed space-y-4">
-                {schoolInfo.principalMessage.content.split('\n\n').slice(0, 4).map((paragraph, index) => (
-                  <p key={index} className="text-base">{paragraph}</p>
-                ))}
-              </div>
-              
-              <div className="mt-6 p-4 bg-orange-50 rounded-xl border-l-4 border-[#af5f36]">
-                <p className="text-[#af5f36] font-semibold italic">
-                  "{schoolInfo.motto}" — our light, our legacy, our way forward.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Our Story - refined two-column */}
         <div className="bg-white rounded-3xl shadow-lg p-8 md:p-12 mb-12 md:mb-16">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
