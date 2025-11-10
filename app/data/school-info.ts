@@ -29,14 +29,6 @@ export const schoolInfo = {
   guruMessage: "One Caste, One Religion, One God for Mankind",
   tagline: "Where Learning Inspires, Values Endure and Minds Illuminate the Future",
   
-  // Leadership
-  principal: {
-    name: "Gireesh Babu K V",
-    title: "Principal",
-    designation: "Principal, Sree Narayana Public School, Chathannoor – Vilappuram (Proposed New Sainik School)",
-    phone: "80868 41985"
-  },
-  
   // Contact Information
   contact: {
     phone: {
@@ -223,9 +215,7 @@ Thus, within this verdant cradle of learning, we continue our journey — where 
   // Management Committee
   managingCommittee: [
     { designation: "President", name: "Sri. M. L. Anidharan" },
-    { designation: "Vice President", name: "Sri. M. Krishna Bhadran" },
     { designation: "Secretary", name: "Prof. K. Sasikumar" },
-    { designation: "Joint Secretary", name: "Er. S. Ajay" },
     { designation: "Treasurer", name: "Sri. K. Balachandran" }
   ],
 
