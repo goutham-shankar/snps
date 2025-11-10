@@ -48,212 +48,83 @@ export default function Management() {
           </div>
         </div>
 
-        {/* Organizational Tree Structure */}
-        <div className="bg-linear-to-br from-orange-50 to-white rounded-3xl shadow-xl p-8 md:p-12 mb-12 border border-orange-100">
+        {/* Organizational Hierarchy - New Modern Design */}
+        <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mb-12 border border-gray-200">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold bg-linear-to-r from-[#af5f36] to-[#8b4a28] bg-clip-text text-transparent mb-3">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
               Organizational Hierarchy
             </h2>
-            <p className="text-gray-600 text-lg">{schoolInfo.managingBody}</p>
+            <div className="w-24 h-1 bg-gradient-to-r from-[#af5f36] to-[#8b4a28] mx-auto mb-4 rounded-full"></div>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">{schoolInfo.managingBody}</p>
           </div>
 
-          {/* Tree Structure - Modern Design */}
-          <div className="relative max-w-6xl mx-auto">
-            {/* Tier 1: President & Secretary */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-8">
-              {president && (
-                <div className="group relative">
-                  <div className="absolute inset-0 bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                  <div className="relative bg-white border-2 border-orange-200 rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                    <div className="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden border-4 border-[#af5f36] shadow-xl ring-4 ring-orange-100">
-                      <Image src="/president.jpg" alt={president.name} width={112} height={112} className="object-cover w-full h-full" />
-                    </div>
-                    <h4 className="text-xl font-bold text-gray-900 text-center mb-1">{president.name}</h4>
-                    <p className="text-sm text-[#af5f36] text-center font-medium">President</p>
+          {/* Modern Card Grid Layout - 3 Cards in a Row */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {/* President */}
+            {president && (
+              <div className="group relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-3xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity"></div>
+                <div className="relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                  <div className="aspect-square w-full overflow-hidden bg-gradient-to-br from-orange-50 to-white">
+                    <Image 
+                      src="/president.jpg" 
+                      alt={president.name} 
+                      width={400} 
+                      height={400} 
+                      className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" 
+                    />
                   </div>
-                </div>
-              )}
-              {secretary && (
-                <div className="group relative">
-                  <div className="absolute inset-0 bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                  <div className="relative bg-white border-2 border-orange-200 rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                    <div className="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden border-4 border-[#af5f36] shadow-xl ring-4 ring-orange-100">
-                      <Image src="/secretary.png" alt={secretary.name} width={112} height={112} className="object-cover w-full h-full" />
-                    </div>
-                    <h4 className="text-xl font-bold text-gray-900 text-center mb-1">{secretary.name}</h4>
-                    <p className="text-sm text-[#af5f36] text-center font-medium">Secretary</p>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Connector */}
-            <div className="flex justify-center my-8">
-              <div className="flex flex-col items-center">
-                <div className="w-1 h-12 bg-gradient-to-b from-[#af5f36] to-orange-300 rounded"></div>
-                <div className="w-3 h-3 bg-[#af5f36] rounded-full"></div>
-                <div className="w-1 h-12 bg-gradient-to-b from-orange-300 to-[#af5f36] rounded"></div>
-              </div>
-            </div>
-
-            {/* Tier 2: Treasurer */}
-            {treasurer && (
-              <div className="max-w-sm mx-auto mb-8">
-                <div className="group relative">
-                  <div className="absolute inset-0 bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                  <div className="relative bg-white border-2 border-orange-200 rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                    <div className="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden border-4 border-[#8b4a28] shadow-xl ring-4 ring-orange-100">
-                      <Image src="/treasurer.png" alt={treasurer.name} width={112} height={112} className="object-cover w-full h-full" />
-                    </div>
-                    <h4 className="text-xl font-bold text-gray-900 text-center mb-1">{treasurer.name}</h4>
-                    <p className="text-sm text-[#8b4a28] text-center font-medium">Treasurer</p>
+                  <div className="p-6 bg-gradient-to-br from-[#af5f36] to-[#8b4a28]">
+                    <h3 className="text-2xl font-bold text-white mb-2 text-center">{president.name}</h3>
+                    <p className="text-white font-semibold text-center">President</p>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Connector */}
-            <div className="flex justify-center my-8">
-              <div className="flex flex-col items-center">
-                <div className="w-1 h-12 bg-gradient-to-b from-[#af5f36] to-orange-300 rounded"></div>
-                <div className="w-3 h-3 bg-[#af5f36] rounded-full"></div>
-                <div className="w-1 h-12 bg-gradient-to-b from-orange-300 to-[#af5f36] rounded"></div>
-              </div>
-            </div>
-
-            {/* Tier 3: Vice President & Joint Secretary */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
-              {vicePresident && (
-                <div className="group relative">
-                  <div className="absolute inset-0 bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-2xl blur opacity-15 group-hover:opacity-30 transition-opacity"></div>
-                  <div className="relative bg-white border-2 border-orange-200 rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                    <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-4 border-[#8b4a28] shadow-xl ring-4 ring-orange-100">
-                      <Image src="/vicepresident.png" alt={vicePresident.name} width={96} height={96} className="object-cover w-full h-full" />
-                    </div>
-                    <h4 className="text-lg font-bold text-gray-900 text-center mb-1">{vicePresident.name}</h4>
-                    <p className="text-sm text-[#8b4a28] text-center font-medium">Vice President</p>
-                  </div>
-                </div>
-              )}
-              {jointSecretary && (
-                <div className="group relative">
-                  <div className="absolute inset-0 bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-2xl blur opacity-15 group-hover:opacity-30 transition-opacity"></div>
-                  <div className="relative bg-white border-2 border-orange-200 rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-                    <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-4 border-[#8b4a28] shadow-xl ring-4 ring-orange-100">
-                      <Image src="/jointsec.png" alt={jointSecretary.name} width={96} height={96} className="object-cover w-full h-full" />
-                    </div>
-                    <h4 className="text-lg font-bold text-gray-900 text-center mb-1">{jointSecretary.name}</h4>
-                    <p className="text-sm text-[#8b4a28] text-center font-medium">Joint Secretary</p>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Connector to Principal */}
-            <div className="flex justify-center my-8">
-              <div className="flex flex-col items-center">
-                <div className="w-1 h-12 bg-gradient-to-b from-[#af5f36] to-orange-300 rounded"></div>
-                <div className="w-4 h-4 bg-[#af5f36] rounded-full"></div>
-                <div className="w-1 h-12 bg-gradient-to-b from-orange-300 to-[#af5f36] rounded"></div>
-              </div>
-            </div>
-
-            {/* Principal Level - Enhanced */}
-            <div className="text-center mb-12">
-              <div className="inline-block relative group">
-                <div className="absolute inset-0 bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-3xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity"></div>
-                <div className="relative bg-linear-to-br from-[#af5f36] to-[#8b4a28] rounded-3xl p-8 shadow-2xl text-white">
-                  <div className="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden border-4 border-white shadow-2xl ring-4 ring-orange-300">
-                    <Image
-                      src="/PRINCI.jpg"
-                      alt={`${schoolInfo.principal.name} - Principal`}
-                      width={128}
-                      height={128}
-                      className="object-cover w-full h-full"
+            {/* Secretary */}
+            {secretary && (
+              <div className="group relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-3xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity"></div>
+                <div className="relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                  <div className="aspect-square w-full overflow-hidden bg-gradient-to-br from-orange-50 to-white">
+                    <Image 
+                      src="/secretary.png" 
+                      alt={secretary.name} 
+                      width={400} 
+                      height={400} 
+                      className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" 
                     />
                   </div>
-                  <h3 className="font-bold text-2xl mb-1">{schoolInfo.principal.name}</h3>
-                  <p className="text-orange-200 font-semibold text-lg mb-2">Principal</p>
-                  <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
-                    </svg>
-                    <span className="text-sm">{schoolInfo.specialStatus}</span>
+                  <div className="p-6 bg-gradient-to-br from-[#af5f36] to-[#8b4a28]">
+                    <h3 className="text-2xl font-bold text-white mb-2 text-center">{secretary.name}</h3>
+                    <p className="text-white font-semibold text-center">Secretary</p>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
 
-            {/* Connector to Departments */}
-            <div className="flex flex-col items-center my-8">
-              <div className="w-1 h-8 bg-gradient-to-b from-[#af5f36] to-gray-400 rounded"></div>
-              <div className="w-64 h-1 bg-gradient-to-r from-transparent via-gray-400 to-transparent rounded"></div>
-              <div className="grid grid-cols-3 gap-16 w-full max-w-2xl">
-                <div className="flex justify-center">
-                  <div className="w-1 h-8 bg-gradient-to-b from-gray-400 to-[#af5f36] rounded"></div>
-                </div>
-                <div className="flex justify-center">
-                  <div className="w-1 h-8 bg-gradient-to-b from-gray-400 to-[#af5f36] rounded"></div>
-                </div>
-                <div className="flex justify-center">
-                  <div className="w-1 h-8 bg-gradient-to-b from-gray-400 to-[#af5f36] rounded"></div>
-                </div>
-              </div>
-            </div>
-
-            {/* Department Structure - Modern Cards */}
-            <div className="grid md:grid-cols-3 gap-6">
-              {/* Academic Department */}
+            {/* Treasurer */}
+            {treasurer && (
               <div className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                <div className="relative bg-white border-2 border-orange-200 rounded-2xl p-6 hover:shadow-xl transition-all hover:-translate-y-1">
-                  <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-full mx-auto mb-4 shadow-lg">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
+                <div className="absolute inset-0 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-3xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity"></div>
+                <div className="relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                  <div className="aspect-square w-full overflow-hidden bg-gradient-to-br from-orange-50 to-white">
+                    <Image 
+                      src="/treasurer.png" 
+                      alt={treasurer.name} 
+                      width={400} 
+                      height={400} 
+                      className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" 
+                    />
                   </div>
-                  <h4 className="font-bold text-gray-900 text-center mb-2 text-lg">Academic Department</h4>
-                  <div className="text-4xl font-bold text-[#af5f36] text-center mb-2">
-                    {schoolInfo.faculty.filter(f => f.position.includes('Teacher') || f.position === 'Teacher').length}
+                  <div className="p-6 bg-gradient-to-br from-[#af5f36] to-[#8b4a28]">
+                    <h3 className="text-2xl font-bold text-white mb-2 text-center">{treasurer.name}</h3>
+                    <p className="text-white font-semibold text-center">Treasurer</p>
                   </div>
-                  <p className="text-gray-600 text-sm text-center font-medium">Teaching Faculty</p>
                 </div>
               </div>
-
-              {/* Administrative Department */}
-              <div className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                <div className="relative bg-white border-2 border-orange-200 rounded-2xl p-6 hover:shadow-xl transition-all hover:-translate-y-1">
-                  <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-full mx-auto mb-4 shadow-lg">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
-                  </div>
-                  <h4 className="font-bold text-gray-900 text-center mb-2 text-lg">Administrative</h4>
-                  <div className="text-4xl font-bold text-[#af5f36] text-center mb-2">
-                    {schoolInfo.nonTeachingStaff.filter(s => s.position.includes('Accountant') || s.position.includes('Assistant') || s.position.includes('Librarian')).length}
-                  </div>
-                  <p className="text-gray-600 text-sm text-center font-medium">Admin Staff</p>
-                </div>
-              </div>
-
-              {/* Support Department */}
-              <div className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                <div className="relative bg-white border-2 border-orange-200 rounded-2xl p-6 hover:shadow-xl transition-all hover:-translate-y-1">
-                  <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-full mx-auto mb-4 shadow-lg">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                  </div>
-                  <h4 className="font-bold text-gray-900 text-center mb-2 text-lg">Support Services</h4>
-                  <div className="text-4xl font-bold text-[#af5f36] text-center mb-2">
-                    {schoolInfo.nonTeachingStaff.filter(s => s.position.includes('Driver') || s.position.includes('Ayah') || s.position.includes('Peon')).length}
-                  </div>
-                  <p className="text-gray-600 text-sm text-center font-medium">Support Staff</p>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
 
