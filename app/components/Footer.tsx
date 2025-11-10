@@ -76,7 +76,7 @@ export default function Footer() {
               <li><Link href="/admission" className="text-gray-400 hover:text-[#af5f36] transition-colors hover:translate-x-1 inline-block text-sm">Admission Process</Link></li>
               <li><Link href="/fees" className="text-gray-400 hover:text-[#af5f36] transition-colors hover:translate-x-1 inline-block text-sm">Fee Structure</Link></li>
               <li><Link href="/calendar" className="text-gray-400 hover:text-[#af5f36] transition-colors hover:translate-x-1 inline-block text-sm">Academic Calendar</Link></li>
-              <li><Link href="/results" className="text-gray-400 hover:text-[#af5f36] transition-colors hover:translate-x-1 inline-block text-sm">Exam Results</Link></li>
+              
             </ul>
           </div>
 
