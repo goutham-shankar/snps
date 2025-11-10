@@ -29,6 +29,13 @@ export const schoolInfo = {
   guruMessage: "One Caste, One Religion, One God for Mankind",
   tagline: "Where Learning Inspires, Values Endure and Minds Illuminate the Future",
   
+  // Leadership
+  principal: {
+    name: "Gireesh Babu K V",
+    title: "Principal",
+    designation: "Principal, Sree Narayana Public School"
+  },
+  
   // Contact Information
   contact: {
     phone: {
