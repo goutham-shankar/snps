@@ -99,12 +99,12 @@ export default async function EventDetailPage({ params }: PageProps) {
   // Generate ICS file content
   const handleAddToCalendar = () => {
     const icsContent = generateICS(
-      title,
-      extractExcerpt(description, 200),
+      title || 'Event',
+      description ? extractExcerpt(description, 200) : 'Event details',
       location || 'TBA',
-      eventDate,
-      eventTime,
-      isAllDay
+      eventDate || new Date().toISOString(),
+      eventTime || null,
+      isAllDay || false
     );
     
     const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
