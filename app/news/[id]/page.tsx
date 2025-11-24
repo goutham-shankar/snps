@@ -76,7 +76,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: title,
     description: excerpt,
-    keywords: ['SNPS news', 'school announcement', title, author].filter(Boolean),
+    keywords: ['SNPS news', 'school announcement', title || '', author || ''].filter(Boolean) as string[],
     authors: author ? [{ name: author }] : undefined,
     openGraph: {
       title: `${title} | Sree Narayana Public School`,
@@ -135,7 +135,7 @@ export default async function NewsDetailPage({ params }: PageProps) {
             <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-            <Link href="/school-news" className="text-gray-600 hover:text-[#af5f36] transition-colors">
+            <Link href="/news" className="text-gray-600 hover:text-[#af5f36] transition-colors">
               School News
             </Link>
             <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -246,7 +246,7 @@ export default async function NewsDetailPage({ params }: PageProps) {
             {/* Back Button */}
             <div className="mt-8">
               <Link
-                href="/school-news"
+                href="/news"
                 className="inline-flex items-center gap-2 text-[#af5f36] font-semibold hover:gap-3 transition-all"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

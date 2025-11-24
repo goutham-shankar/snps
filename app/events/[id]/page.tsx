@@ -8,7 +8,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeSanitize from 'rehype-sanitize';
 import { fetchAPI, getStrapiMediaUrl, StrapiSingleResponse, EventAttributes, extractExcerpt } from '../../lib/api';
-import { formatDate, formatTime, generateICS } from '../../utils/formatDate';
+import { formatDate, formatTime } from '../../utils/formatDate';
+import AddToCalendarButton from '../../components/events/AddToCalendarButton';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -124,26 +125,6 @@ export default async function EventDetailPage({ params }: PageProps) {
   }
   
   const imageUrl = getStrapiMediaUrl(banner);
-
-  // Generate ICS file content
-  const handleAddToCalendar = () => {
-    const icsContent = generateICS(
-      title || 'Event',
-      description ? extractExcerpt(description, 200) : 'Event details',
-      location || 'TBA',
-      eventDate || new Date().toISOString(),
-      eventTime || null,
-      isAllDay || false
-    );
-    
-    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.setAttribute('download', `${title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.ics`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   return (
     <div className="min-h-screen bg-gray-50">

@@ -113,7 +113,7 @@ export default function LatestNewsSection() {
             return (
               <Link
                 key={newsId}
-                href={`/school-news/${newsSlug}`}
+                href={`/news/${newsSlug}`}
                 className="group bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
               >
                 {/* Thumbnail */}
@@ -167,7 +167,7 @@ export default function LatestNewsSection() {
         {/* View All Button */}
         <div className="text-center">
           <Link
-            href="/school-news"
+            href="/news"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-[#af5f36] to-[#8b4a28] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
           >
             <span>View All News</span>

@@ -139,7 +139,7 @@ export default async function SchoolNewsPage() {
                 return (
                   <Link
                     key={itemId}
-                    href={`/school-news/${itemSlug}`}
+                    href={`/news/${itemSlug}`}
                     className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
                   >
                     {/* Thumbnail */}
