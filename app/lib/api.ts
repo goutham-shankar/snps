@@ -150,12 +150,17 @@ export async function fetchAPI<T>(
  * @returns Full URL to the media file
  */
 export function getStrapiMediaUrl(image: StrapiImage | null | undefined): string {
-  if (!image) return '/placeholder.jpg'; // Fallback image
+  // Return a data URL for a simple gray placeholder if no image
+  if (!image) {
+    return 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect width="800" height="600" fill="%23e5e7eb"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="24" fill="%239ca3af"%3ENo Image%3C/text%3E%3C/svg%3E';
+  }
   
   // Check if url exists directly (Strapi v5)
   const url = image.url;
   
-  if (!url) return '/placeholder.jpg';
+  if (!url) {
+    return 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="600"%3E%3Crect width="800" height="600" fill="%23e5e7eb"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="24" fill="%239ca3af"%3ENo Image%3C/text%3E%3C/svg%3E';
+  }
   
   // If URL is already absolute, return as is
   if (url.startsWith('http://') || url.startsWith('https://')) {

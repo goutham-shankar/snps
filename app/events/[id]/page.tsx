@@ -14,9 +14,10 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-async function getEvent(id: string) {
+async function getEvent(slugOrId: string) {
   try {
-    const response = await fetchAPI<StrapiSingleResponse<EventAttributes>>(`/events/${id}`, {
+    // Try to fetch by documentId
+    const response = await fetchAPI<StrapiSingleResponse<EventAttributes>>(`/events/${slugOrId}`, {
       cache: 'no-store',
     });
     

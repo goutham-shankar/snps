@@ -107,12 +107,13 @@ export default function LatestNewsSection() {
             const imageUrl = getStrapiMediaUrl(thumbnail);
             const excerpt = description ? extractExcerpt(description, 100) : '';
             const displayDate = publishedDate || publishedAt || createdAt || '';
-            const newsId = (newsItem as any).id || (newsItem as any).documentId;
+            const newsId = (newsItem as any).documentId || (newsItem as any).id;
+            const newsSlug = (data as any).slug || newsId;
 
             return (
               <Link
                 key={newsId}
-                href={`/school-news/${newsId}`}
+                href={`/school-news/${newsSlug}`}
                 className="group bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
               >
                 {/* Thumbnail */}

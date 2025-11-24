@@ -110,12 +110,14 @@ export default function UpcomingEventsSection() {
             const imageUrl = getStrapiMediaUrl(banner);
             const excerpt = description ? extractExcerpt(description, 80) : '';
             const dateParts = getDateParts(eventDate);
-            const eventId = (event as any).id || (event as any).documentId;
+            const eventId = (event as any).documentId || (event as any).id;
+            const eventSlug = (data as any).slug || eventId;
+            const isEventUpcoming = isUpcoming(eventDate);
 
             return (
               <Link
                 key={eventId}
-                href={`/events/${eventId}`}
+                href={`/events/${eventSlug}`}
                 className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-orange-200"
               >
                 {/* Event Image */}
@@ -127,9 +129,15 @@ export default function UpcomingEventsSection() {
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  <div className="absolute top-3 right-3 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                    Upcoming
-                  </div>
+                  {isEventUpcoming ? (
+                    <div className="absolute top-3 right-3 bg-gradient-to-br from-green-500 to-green-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                      Upcoming
+                    </div>
+                  ) : (
+                    <div className="absolute top-3 right-3 bg-gradient-to-br from-gray-500 to-gray-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                      Past
+                    </div>
+                  )}
                 </div>
 
                 {/* Content */}

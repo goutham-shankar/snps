@@ -14,9 +14,10 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-async function getNewsItem(id: string) {
+async function getNewsItem(slugOrId: string) {
   try {
-    const response = await fetchAPI<StrapiSingleResponse<SchoolNewsAttributes>>(`/school-news-all/${id}`, {
+    // Try to fetch by documentId first
+    const response = await fetchAPI<StrapiSingleResponse<SchoolNewsAttributes>>(`/school-news-all/${slugOrId}`, {
       cache: 'no-store',
     });
     
