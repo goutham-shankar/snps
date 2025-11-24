@@ -256,8 +256,8 @@ export default async function EventsPage() {
 
                 return (
                   <Link
-                    key={event.id}
-                    href={`/events/${event.id}`}
+                    key={eventId}
+                    href={`/events/${eventSlug}`}
                     className="group bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 opacity-90 hover:opacity-100"
                   >
                     {/* Event Image */}
