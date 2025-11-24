@@ -14,16 +14,44 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-async function getEvent(slugOrId: string) {
+async function getEvent(slug: string) {
   try {
-    // Try to fetch by documentId
-    const response = await fetchAPI<StrapiSingleResponse<EventAttributes>>(`/events/${slugOrId}`, {
+    // First, fetch all events to find the one with matching slug
+    const allEventsResponse = await fetchAPI<{ data: Array<any> }>('/events', {
       cache: 'no-store',
     });
     
-    if (!response.data) return null;
+    if (!allEventsResponse.data || !Array.isArray(allEventsResponse.data)) {
+      return null;
+    }
     
-    return response.data;
+    // Find the item with matching slug
+    const matchingItem = allEventsResponse.data.find((item) => {
+      const data = item.attributes || item;
+      return data.slug === slug;
+    });
+    
+    if (!matchingItem) {
+      return null;
+    }
+    
+    // Get the documentId from the matching item
+    const documentId = matchingItem.documentId || matchingItem.id;
+    
+    if (!documentId) {
+      return null;
+    }
+    
+    // Now fetch the single item using documentId
+    const singleItemResponse = await fetchAPI<StrapiSingleResponse<EventAttributes>>(`/events/${documentId}`, {
+      cache: 'no-store',
+    });
+    
+    if (!singleItemResponse.data) {
+      return null;
+    }
+    
+    return singleItemResponse.data;
   } catch (error) {
     console.error('Error fetching event:', error);
     return null;

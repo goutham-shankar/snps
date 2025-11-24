@@ -14,17 +14,44 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-async function getNewsItem(slugOrId: string) {
+async function getNewsItem(slug: string) {
   try {
-    // Try to fetch by documentId first
-    const response = await fetchAPI<StrapiSingleResponse<SchoolNewsAttributes>>(`/school-news-all/${slugOrId}`, {
+    // First, fetch all news items to find the one with matching slug
+    const allNewsResponse = await fetchAPI<{ data: Array<any> }>('/school-news-all', {
       cache: 'no-store',
     });
     
-    // Handle both v4 and v5 structures
-    if (!response.data) return null;
+    if (!allNewsResponse.data || !Array.isArray(allNewsResponse.data)) {
+      return null;
+    }
     
-    return response.data;
+    // Find the item with matching slug
+    const matchingItem = allNewsResponse.data.find((item) => {
+      const data = item.attributes || item;
+      return data.slug === slug;
+    });
+    
+    if (!matchingItem) {
+      return null;
+    }
+    
+    // Get the documentId from the matching item
+    const documentId = matchingItem.documentId || matchingItem.id;
+    
+    if (!documentId) {
+      return null;
+    }
+    
+    // Now fetch the single item using documentId
+    const singleItemResponse = await fetchAPI<StrapiSingleResponse<SchoolNewsAttributes>>(`/school-news-all/${documentId}`, {
+      cache: 'no-store',
+    });
+    
+    if (!singleItemResponse.data) {
+      return null;
+    }
+    
+    return singleItemResponse.data;
   } catch (error) {
     console.error('Error fetching news item:', error);
     return null;

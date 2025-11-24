@@ -131,7 +131,7 @@ export default async function EventsPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {upcoming.map((event) => {
                 const data = event.attributes || event;
-                const { title, description, eventDate, eventTime, location, banner } = data;
+                const { title, description, eventDate, eventTime, location, banner, slug } = data;
                 
                 if (!title || !eventDate) return null;
                 
@@ -244,14 +244,15 @@ export default async function EventsPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {past.map((event) => {
                 const data = event.attributes || event;
-                const { title, description, eventDate, eventTime, location, banner } = data;
+                const { title, description, eventDate, eventTime, location, banner, slug } = data;
                 
                 if (!title || !eventDate) return null;
                 
                 const imageUrl = getStrapiMediaUrl(banner);
                 const excerpt = description ? extractExcerpt(description, 100) : '';
                 const dateParts = getDateParts(eventDate);
-                const eventId = event.id || event.documentId;
+                const eventId = event.documentId || event.id;
+                const eventSlug = slug || eventId;
 
                 return (
                   <Link
