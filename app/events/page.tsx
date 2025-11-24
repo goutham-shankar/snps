@@ -264,7 +264,7 @@ export default async function EventsPage() {
                     <div className="relative h-48 overflow-hidden bg-gray-200">
                       <Image
                         src={imageUrl}
-                        alt={banner?.data?.attributes?.alternativeText || title}
+                        alt={banner?.alternativeText || title || 'Event image'}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300 grayscale group-hover:grayscale-0"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
