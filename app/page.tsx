@@ -2,6 +2,8 @@
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
+import LatestNewsSection from './components/news/LatestNewsSection';
+import UpcomingEventsSection from './components/events/UpcomingEventsSection';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -572,6 +574,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Latest News Section */}
+      <LatestNewsSection />
+
+      {/* Upcoming Events Section */}
+      <UpcomingEventsSection />
 
       {/* CTA Section */}
       <section className="py-20 relative overflow-hidden">
