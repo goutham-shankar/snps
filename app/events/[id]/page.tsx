@@ -45,9 +45,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const excerpt = description ? extractExcerpt(description, 160) : 'Event details';
 
   return {
-    title: title,
+    title: title || 'Event',
     description: excerpt,
-    keywords: ['SNPS event', 'school event', title, location].filter(Boolean),
+    keywords: ['SNPS event', 'school event', title || '', location || ''].filter(Boolean),
     openGraph: {
       title: `${title} | Sree Narayana Public School`,
       description: excerpt,
