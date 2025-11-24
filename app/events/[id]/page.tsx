@@ -153,7 +153,7 @@ export default async function EventDetailPage({ params }: PageProps) {
       </section>
 
       {/* Hero Banner */}
-      <section className="relative h-[400px] md:h-[500px] bg-gray-900 overflow-hidden mt-16">
+      <section className="relative h-[400px] md:h-[500px] bg-gray-900 overflow-hidden mt-20">
         <Image
           src={imageUrl}
           alt={banner?.alternativeText || title || 'Event image'}
