@@ -129,15 +129,9 @@ export default function UpcomingEventsSection() {
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  {isEventUpcoming ? (
-                    <div className="absolute top-3 right-3 bg-gradient-to-br from-green-500 to-green-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                      Upcoming
-                    </div>
-                  ) : (
-                    <div className="absolute top-3 right-3 bg-gradient-to-br from-gray-500 to-gray-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
-                      Past
-                    </div>
-                  )}
+                  <div className="absolute top-3 right-3 bg-gradient-to-br from-green-500 to-green-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                    Upcoming
+                  </div>
                 </div>
 
                 {/* Content */}

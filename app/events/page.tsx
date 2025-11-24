@@ -86,11 +86,11 @@ export default async function EventsPage() {
             </div>
             
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Upcoming Events & Activities
+              School Events & Activities
             </h1>
             
             <p className="text-xl text-orange-100 leading-relaxed">
-              Join us in celebrating academic excellence, sports achievements, and cultural programs that make our school community vibrant
+              Stay connected with all activities, celebrations, and important dates at our school
             </p>
           </div>
         </div>
@@ -111,7 +111,7 @@ export default async function EventsPage() {
                 </svg>
               </div>
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Upcoming Events</h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Events</h2>
                 <p className="text-gray-600">Mark your calendar for these exciting events</p>
               </div>
             </div>
@@ -138,12 +138,14 @@ export default async function EventsPage() {
                 const imageUrl = getStrapiMediaUrl(banner);
                 const excerpt = description ? extractExcerpt(description, 100) : '';
                 const dateParts = getDateParts(eventDate);
-                const eventId = event.id || event.documentId;
+                const eventId = event.documentId || event.id;
+                const eventSlug = slug || eventId;
+                const isEventUpcoming = isUpcoming(eventDate);
 
                 return (
                   <Link
-                    key={event.id}
-                    href={`/events/${event.id}`}
+                    key={eventId}
+                    href={`/events/${eventSlug}`}
                     className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-orange-200"
                   >
                     {/* Event Image */}
@@ -155,15 +157,9 @@ export default async function EventsPage() {
                         className="object-cover group-hover:scale-110 transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
-                      {isEventUpcoming ? (
-                        <div className="absolute top-4 right-4 bg-gradient-to-br from-green-500 to-green-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                          Upcoming
-                        </div>
-                      ) : (
-                        <div className="absolute top-4 right-4 bg-gradient-to-br from-gray-500 to-gray-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                          Past
-                        </div>
-                      )}
+                      <div className="absolute top-4 right-4 bg-gradient-to-br from-green-500 to-green-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                        Upcoming
+                      </div>
                     </div>
 
                     {/* Content */}
@@ -272,6 +268,9 @@ export default async function EventsPage() {
                         className="object-cover group-hover:scale-105 transition-transform duration-300 grayscale group-hover:grayscale-0"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
+                      <div className="absolute top-4 right-4 bg-gradient-to-br from-gray-500 to-gray-600 text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg">
+                        Past
+                      </div>
                     </div>
 
                     {/* Content */}
