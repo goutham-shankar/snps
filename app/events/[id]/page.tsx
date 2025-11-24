@@ -153,7 +153,7 @@ export default async function EventDetailPage({ params }: PageProps) {
       </section>
 
       {/* Hero Banner */}
-      <section className="relative h-[400px] md:h-[500px] bg-gray-900 overflow-hidden mt-20">
+      <section className="relative h-[400px] md:h-[500px] bg-gray-900 overflow-hidden">
         <Image
           src={imageUrl}
           alt={banner?.alternativeText || title || 'Event image'}
@@ -162,7 +162,7 @@ export default async function EventDetailPage({ params }: PageProps) {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30"></div>
         
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
           <div className="container mx-auto">
@@ -230,11 +230,11 @@ export default async function EventDetailPage({ params }: PageProps) {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Action Buttons */}
-            <div className="bg-gradient-to-r from-[#af5f36] to-[#8b4a28] rounded-2xl p-6 mb-8 shadow-lg">
+            <div className="bg-gradient-to-r from-[#af5f36] to-[#8b4a28] rounded-2xl p-6 mb-8 shadow-xl">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="text-white">
-                  <h3 className="font-bold text-lg mb-1">Don't Miss This Event!</h3>
-                  <p className="text-orange-100 text-sm">Add it to your calendar or register now</p>
+                  <h3 className="font-bold text-xl mb-1">Don't Miss This Event!</h3>
+                  <p className="text-orange-50 text-sm">Add it to your calendar or register now</p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                   <AddToCalendarButton
@@ -250,7 +250,7 @@ export default async function EventDetailPage({ params }: PageProps) {
                       href={registrationLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#af5f36] px-6 py-3 rounded-lg font-semibold transition-all"
+                      className="inline-flex items-center justify-center gap-2 bg-white text-[#af5f36] hover:bg-orange-50 border-2 border-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl"
                     >
                       <span>Register Now</span>
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -263,15 +263,17 @@ export default async function EventDetailPage({ params }: PageProps) {
             </div>
 
             {/* Event Details */}
-            <article className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-lg flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <span>Event Details</span>
-              </h2>
+            <article className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
+              <div className="mb-8 pb-6 border-b-2 border-[#af5f36]">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-xl flex items-center justify-center shadow-lg">
+                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <span>Event Details</span>
+                </h2>
+              </div>
 
               <div className="prose prose-lg max-w-none prose-slate
                 prose-headings:text-gray-900 prose-headings:font-bold prose-headings:mt-8 prose-headings:mb-4

@@ -157,7 +157,7 @@ export default async function EventsPage() {
                         className="object-cover group-hover:scale-110 transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
-                      <div className="absolute top-4 right-4 bg-gradient-to-br from-green-500 to-green-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                      <div className="absolute top-4 right-4 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
                         Upcoming
                       </div>
                     </div>

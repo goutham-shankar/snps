@@ -148,7 +148,7 @@ export default async function NewsDetailPage({ params }: PageProps) {
       </section>
 
       {/* Hero Banner */}
-      <section className="relative h-[400px] md:h-[500px] bg-gray-900 overflow-hidden mt-16">
+      <section className="relative h-[400px] md:h-[500px] bg-gray-900 overflow-hidden">
         <Image
           src={imageUrl}
           alt={thumbnail?.alternativeText || title || 'News image'}
@@ -157,7 +157,7 @@ export default async function NewsDetailPage({ params }: PageProps) {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/30"></div>
         
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
           <div className="container mx-auto">
@@ -195,7 +195,17 @@ export default async function NewsDetailPage({ params }: PageProps) {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <article className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+            <article className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
+              <div className="mb-8 pb-6 border-b-2 border-[#af5f36]">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#af5f36] to-[#8b4a28] rounded-xl flex items-center justify-center shadow-lg">
+                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                    </svg>
+                  </div>
+                  <span>Article</span>
+                </h2>
+              </div>
               <div className="prose prose-lg max-w-none prose-slate
                 prose-headings:text-gray-900 prose-headings:font-bold prose-headings:mt-8 prose-headings:mb-4
                 prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
@@ -223,23 +233,10 @@ export default async function NewsDetailPage({ params }: PageProps) {
                 <div className="flex items-center justify-between flex-wrap gap-4">
                   <div className="text-gray-600 font-medium">Share this article:</div>
                   <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => {
-                        if (navigator.share) {
-                          navigator.share({
-                            title: title,
-                            text: extractExcerpt(description, 100),
-                            url: window.location.href,
-                          });
-                        }
-                      }}
-                      className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition-colors"
-                    >
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                      </svg>
-                      <span>Share</span>
-                    </button>
+                    <ShareButton
+                      title={title || 'News Article'}
+                      description={extractExcerpt(description, 100)}
+                    />
                   </div>
                 </div>
               </div>
