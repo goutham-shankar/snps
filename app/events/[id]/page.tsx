@@ -237,15 +237,14 @@ export default async function EventDetailPage({ params }: PageProps) {
                   <p className="text-orange-100 text-sm">Add it to your calendar or register now</p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-                  <button
-                    onClick={handleAddToCalendar}
-                    className="inline-flex items-center justify-center gap-2 bg-white text-[#af5f36] hover:bg-orange-50 px-6 py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                    </svg>
-                    <span>Add to Calendar</span>
-                  </button>
+                  <AddToCalendarButton
+                    title={title || 'Event'}
+                    description={description ? extractExcerpt(description, 200) : 'Event details'}
+                    location={location || 'TBA'}
+                    eventDate={eventDate || new Date().toISOString()}
+                    eventTime={eventTime || null}
+                    isAllDay={isAllDay || false}
+                  />
                   {registrationLink && (
                     <a
                       href={registrationLink}
