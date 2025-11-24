@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         hostname: 'plus.unsplash.com',
         port: '',
         pathname: '/**',
+      },{
+        protocol: 'https',
+        hostname: 'inspiring-frog-36ed0e23b7.media.strapiapp.com',
+        port: '',
+        pathname: '/**',
       },
     ],
   },
