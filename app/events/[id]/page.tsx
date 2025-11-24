@@ -17,8 +17,10 @@ interface PageProps {
 async function getEvent(id: string) {
   try {
     const response = await fetchAPI<StrapiSingleResponse<EventAttributes>>(`/events/${id}`, {
-      next: { revalidate: 60 },
+      cache: 'no-store',
     });
+    
+    if (!response.data) return null;
     
     return response.data;
   } catch (error) {
@@ -37,9 +39,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const { title, description, banner, eventDate, location } = event.attributes;
-  const imageUrl = getStrapiMediaUrl(banner?.data?.attributes?.url);
-  const excerpt = extractExcerpt(description, 160);
+  const data = event.attributes || event;
+  const { title, description, banner, eventDate, location } = data;
+  const imageUrl = getStrapiMediaUrl(banner);
+  const excerpt = description ? extractExcerpt(description, 160) : 'Event details';
 
   return {
     title: title,
@@ -75,6 +78,7 @@ export default async function EventDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const data = event.attributes || event;
   const { 
     title, 
     description, 
@@ -84,9 +88,13 @@ export default async function EventDetailPage({ params }: PageProps) {
     banner, 
     registrationLink,
     isAllDay 
-  } = event.attributes;
+  } = data;
   
-  const imageUrl = getStrapiMediaUrl(banner?.data?.attributes?.url);
+  if (!title || !description || !eventDate) {
+    notFound();
+  }
+  
+  const imageUrl = getStrapiMediaUrl(banner);
 
   // Generate ICS file content
   const handleAddToCalendar = () => {
@@ -134,10 +142,10 @@ export default async function EventDetailPage({ params }: PageProps) {
       </section>
 
       {/* Hero Banner */}
-      <section className="relative h-[400px] md:h-[500px] bg-gray-900 overflow-hidden">
+      <section className="relative h-[400px] md:h-[500px] bg-gray-900 overflow-hidden mt-16">
         <Image
           src={imageUrl}
-          alt={banner?.data?.attributes?.alternativeText || title}
+          alt={banner?.alternativeText || title || 'Event image'}
           fill
           priority
           className="object-cover"
@@ -156,17 +164,19 @@ export default async function EventDetailPage({ params }: PageProps) {
               {/* Event Meta Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {/* Date */}
-                <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm px-4 py-3 rounded-xl">
-                  <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
+                {eventDate && (
+                  <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm px-4 py-3 rounded-xl">
+                    <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="text-xs text-orange-200 font-medium">Date</div>
+                      <div className="text-white font-semibold">{formatDate(eventDate)}</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-xs text-orange-200 font-medium">Date</div>
-                    <div className="text-white font-semibold">{formatDate(eventDate)}</div>
-                  </div>
-                </div>
+                )}
 
                 {/* Time */}
                 {eventTime && (

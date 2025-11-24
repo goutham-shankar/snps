@@ -68,11 +68,11 @@ export default function Header() {
       href: '/facilities',
       dropdown: [
         { label: 'Facilities', href: '/facilities' },
-        { label: 'Gallery', href: '/gallery' }
+        { label: 'Gallery', href: '/gallery' },
+        { label: 'News', href: '/school-news' },
+        { label: 'Events', href: '/events' }
       ]
     },
-    { label: 'News', href: '/school-news' },
-    { label: 'Events', href: '/events' },
     { 
       label: 'Information', 
       href: '/policies',

@@ -15,58 +15,56 @@
 const STRAPI_API_URL = 'https://inspiring-frog-36ed0e23b7.strapiapp.com/api';
 
 export interface StrapiImage {
-  data: {
-    id: number;
-    attributes: {
-      url: string;
-      name: string;
-      alternativeText: string | null;
-      caption: string | null;
-      width: number;
-      height: number;
-      formats?: {
-        thumbnail?: { url: string };
-        small?: { url: string };
-        medium?: { url: string };
-        large?: { url: string };
-      };
-    };
-  } | null;
+  id?: number;
+  documentId?: string;
+  name?: string;
+  alternativeText?: string | null;
+  caption?: string | null;
+  width?: number;
+  height?: number;
+  url?: string;
+  formats?: {
+    thumbnail?: { url: string };
+    small?: { url: string };
+    medium?: { url: string };
+    large?: { url: string };
+  };
 }
 
 export interface SchoolNewsAttributes {
-  title: string;
-  slug: string;
-  description: string;
-  publishedDate: string;
-  author: string | null;
-  thumbnail: StrapiImage;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
+  title?: string;
+  slug?: string;
+  description?: string;
+  publishedDate?: string;
+  author?: string | null;
+  thumbnail?: StrapiImage | null;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
 }
 
 export interface EventAttributes {
-  title: string;
-  slug: string;
-  description: string;
-  eventDate: string;
-  eventTime: string | null;
-  location: string | null;
-  banner: StrapiImage;
-  registrationLink: string | null;
-  isAllDay: boolean;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
+  title?: string;
+  slug?: string;
+  description?: string;
+  eventDate?: string;
+  eventTime?: string | null;
+  location?: string | null;
+  banner?: StrapiImage | null;
+  registrationLink?: string | null;
+  isAllDay?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
 }
 
 export interface StrapiResponse<T> {
   data: Array<{
-    id: number;
-    attributes: T;
-  }>;
-  meta: {
+    id?: number;
+    documentId?: string;
+    attributes?: T;
+  } & T>;
+  meta?: {
     pagination?: {
       page: number;
       pageSize: number;
@@ -77,11 +75,12 @@ export interface StrapiResponse<T> {
 }
 
 export interface StrapiSingleResponse<T> {
-  data: {
-    id: number;
-    attributes: T;
-  } | null;
-  meta: Record<string, unknown>;
+  data: ({
+    id?: number;
+    documentId?: string;
+    attributes?: T;
+  } & T) | null;
+  meta?: Record<string, unknown>;
 }
 
 interface FetchOptions {
@@ -145,13 +144,18 @@ export async function fetchAPI<T>(
 
 /**
  * Get the full URL for a Strapi media file
- * Handles both relative and absolute URLs
+ * Handles both relative and absolute URLs, and Strapi v5 structure
  * 
- * @param url - URL from Strapi media object
+ * @param image - Strapi image object
  * @returns Full URL to the media file
  */
-export function getStrapiMediaUrl(url: string | undefined | null): string {
-  if (!url) return '/placeholder.jpg'; // Fallback image
+export function getStrapiMediaUrl(image: StrapiImage | null | undefined): string {
+  if (!image) return '/placeholder.jpg'; // Fallback image
+  
+  // Check if url exists directly (Strapi v5)
+  const url = image.url;
+  
+  if (!url) return '/placeholder.jpg';
   
   // If URL is already absolute, return as is
   if (url.startsWith('http://') || url.startsWith('https://')) {

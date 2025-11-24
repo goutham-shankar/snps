@@ -39,15 +39,25 @@ function NewsSkeleton() {
 async function getSchoolNews() {
   try {
     const response = await fetchAPI<StrapiResponse<SchoolNewsAttributes>>('/school-news-all', {
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+      cache: 'no-store',
     });
     
+    if (!response.data || !Array.isArray(response.data)) {
+      return [];
+    }
+    
     // Sort by publishedDate (newest first)
-    const sortedNews = response.data.sort((a, b) => {
-      const dateA = new Date(a.attributes.publishedDate || a.attributes.publishedAt);
-      const dateB = new Date(b.attributes.publishedDate || b.attributes.publishedAt);
-      return dateB.getTime() - dateA.getTime();
-    });
+    const sortedNews = response.data
+      .filter(item => item && (item.title || item.attributes?.title)) // Filter out invalid items
+      .sort((a, b) => {
+        // Handle both Strapi v4 (attributes) and v5 (direct) structures
+        const aData = a.attributes || a;
+        const bData = b.attributes || b;
+        
+        const dateA = new Date(aData.publishedDate || aData.publishedAt || aData.createdAt || 0);
+        const dateB = new Date(bData.publishedDate || bData.publishedAt || bData.createdAt || 0);
+        return dateB.getTime() - dateA.getTime();
+      });
     
     return sortedNews;
   } catch (error) {
@@ -64,7 +74,7 @@ export default async function SchoolNewsPage() {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#af5f36] to-[#8b4a28] py-24 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#af5f36] to-[#8b4a28] py-24 overflow-hidden mt-20">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
@@ -113,22 +123,29 @@ export default async function SchoolNewsPage() {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {newsItems.map((newsItem) => {
-                const { title, slug, description, publishedDate, author, thumbnail, publishedAt } = newsItem.attributes;
-                const imageUrl = getStrapiMediaUrl(thumbnail?.data?.attributes?.url);
-                const excerpt = extractExcerpt(description, 120);
-                const displayDate = publishedDate || publishedAt;
+                // Handle both Strapi v4 (attributes) and v5 (direct) structures
+                const data = newsItem.attributes || newsItem;
+                const { title, slug, description, publishedDate, author, thumbnail, publishedAt, createdAt } = data;
+                
+                // Skip if no title
+                if (!title) return null;
+                
+                const imageUrl = getStrapiMediaUrl(thumbnail);
+                const excerpt = description ? extractExcerpt(description, 120) : '';
+                const displayDate = publishedDate || publishedAt || createdAt || '';
+                const itemId = newsItem.id || newsItem.documentId;
 
                 return (
                   <Link
-                    key={newsItem.id}
-                    href={`/school-news/${newsItem.id}`}
+                    key={itemId}
+                    href={`/school-news/${itemId}`}
                     className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
                   >
                     {/* Thumbnail */}
                     <div className="relative h-56 overflow-hidden bg-gray-200">
                       <Image
                         src={imageUrl}
-                        alt={thumbnail?.data?.attributes?.alternativeText || title}
+                        alt={thumbnail?.alternativeText || title || 'News image'}
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -139,20 +156,22 @@ export default async function SchoolNewsPage() {
                     {/* Content */}
                     <div className="p-6">
                       {/* Meta */}
-                      <div className="flex items-center gap-3 mb-4 text-sm">
-                        <div className="flex items-center gap-1 text-[#af5f36]">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                          </svg>
-                          <span className="font-medium">{formatDate(displayDate)}</span>
+                      {displayDate && (
+                        <div className="flex items-center gap-3 mb-4 text-sm">
+                          <div className="flex items-center gap-1 text-[#af5f36]">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <span className="font-medium">{formatDate(displayDate)}</span>
+                          </div>
+                          {author && (
+                            <>
+                              <span className="text-gray-300">•</span>
+                              <span className="text-gray-600">{author}</span>
+                            </>
+                          )}
                         </div>
-                        {author && (
-                          <>
-                            <span className="text-gray-300">•</span>
-                            <span className="text-gray-600">{author}</span>
-                          </>
-                        )}
-                      </div>
+                      )}
 
                       {/* Title */}
                       <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#af5f36] transition-colors line-clamp-2">
@@ -160,9 +179,11 @@ export default async function SchoolNewsPage() {
                       </h3>
 
                       {/* Excerpt */}
-                      <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
-                        {excerpt}
-                      </p>
+                      {excerpt && (
+                        <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                          {excerpt}
+                        </p>
+                      )}
 
                       {/* Read More Link */}
                       <div className="flex items-center gap-2 text-[#af5f36] font-semibold group-hover:gap-3 transition-all">

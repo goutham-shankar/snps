@@ -7,7 +7,7 @@ import { fetchAPI, getStrapiMediaUrl, extractExcerpt, StrapiResponse, SchoolNews
 import { formatDateShort } from '../../utils/formatDate';
 
 export default function LatestNewsSection() {
-  const [newsItems, setNewsItems] = useState<Array<{ id: number; attributes: SchoolNewsAttributes }>>([]);
+  const [newsItems, setNewsItems] = useState<Array<any>>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,11 +15,23 @@ export default function LatestNewsSection() {
       try {
         const response = await fetchAPI<StrapiResponse<SchoolNewsAttributes>>('/school-news-all');
         
+        if (!response.data || !Array.isArray(response.data)) {
+          setNewsItems([]);
+          setLoading(false);
+          return;
+        }
+        
         // Sort by publishedDate and take latest 3
         const sortedNews = response.data
+          .filter(item => {
+            const data = item.attributes || item;
+            return data && data.title;
+          })
           .sort((a, b) => {
-            const dateA = new Date(a.attributes.publishedDate || a.attributes.publishedAt);
-            const dateB = new Date(b.attributes.publishedDate || b.attributes.publishedAt);
+            const aData = a.attributes || a;
+            const bData = b.attributes || b;
+            const dateA = new Date(aData.publishedDate || aData.publishedAt || aData.createdAt || 0);
+            const dateB = new Date(bData.publishedDate || bData.publishedAt || bData.createdAt || 0);
             return dateB.getTime() - dateA.getTime();
           })
           .slice(0, 3);
@@ -87,22 +99,27 @@ export default function LatestNewsSection() {
         {/* News Grid */}
         <div className="grid md:grid-cols-3 gap-8 mb-10">
           {newsItems.map((newsItem) => {
-            const { title, description, publishedDate, thumbnail, publishedAt } = newsItem.attributes;
-            const imageUrl = getStrapiMediaUrl(thumbnail?.data?.attributes?.url);
-            const excerpt = extractExcerpt(description, 100);
-            const displayDate = publishedDate || publishedAt;
+            const data = newsItem.attributes || newsItem;
+            const { title, description, publishedDate, thumbnail, publishedAt, createdAt } = data;
+            
+            if (!title) return null;
+            
+            const imageUrl = getStrapiMediaUrl(thumbnail);
+            const excerpt = description ? extractExcerpt(description, 100) : '';
+            const displayDate = publishedDate || publishedAt || createdAt || '';
+            const newsId = (newsItem as any).id || (newsItem as any).documentId;
 
             return (
               <Link
-                key={newsItem.id}
-                href={`/school-news/${newsItem.id}`}
+                key={newsId}
+                href={`/school-news/${newsId}`}
                 className="group bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
               >
                 {/* Thumbnail */}
                 <div className="relative h-48 overflow-hidden bg-gray-200">
                   <Image
                     src={imageUrl}
-                    alt={thumbnail?.data?.attributes?.alternativeText || title}
+                    alt={thumbnail?.alternativeText || title || 'News image'}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, 33vw"
@@ -112,12 +129,14 @@ export default function LatestNewsSection() {
                 {/* Content */}
                 <div className="p-6">
                   {/* Date */}
-                  <div className="flex items-center gap-2 text-sm text-[#af5f36] mb-3">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <span className="font-medium">{formatDateShort(displayDate)}</span>
-                  </div>
+                  {displayDate && (
+                    <div className="flex items-center gap-2 text-sm text-[#af5f36] mb-3">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      <span className="font-medium">{formatDateShort(displayDate)}</span>
+                    </div>
+                  )}
 
                   {/* Title */}
                   <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#af5f36] transition-colors line-clamp-2">
@@ -125,9 +144,11 @@ export default function LatestNewsSection() {
                   </h3>
 
                   {/* Excerpt */}
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
-                    {excerpt}
-                  </p>
+                  {excerpt && (
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
+                      {excerpt}
+                    </p>
+                  )}
 
                   {/* Read More */}
                   <div className="flex items-center gap-2 text-[#af5f36] font-semibold text-sm group-hover:gap-3 transition-all">

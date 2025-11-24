@@ -17,8 +17,11 @@ interface PageProps {
 async function getNewsItem(id: string) {
   try {
     const response = await fetchAPI<StrapiSingleResponse<SchoolNewsAttributes>>(`/school-news-all/${id}`, {
-      next: { revalidate: 60 },
+      cache: 'no-store',
     });
+    
+    // Handle both v4 and v5 structures
+    if (!response.data) return null;
     
     return response.data;
   } catch (error) {
@@ -37,9 +40,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const { title, description, thumbnail, publishedDate, author } = newsItem.attributes;
-  const imageUrl = getStrapiMediaUrl(thumbnail?.data?.attributes?.url);
-  const excerpt = extractExcerpt(description, 160);
+  const data = newsItem.attributes || newsItem;
+  const { title, description, thumbnail, publishedDate, author } = data;
+  const imageUrl = getStrapiMediaUrl(thumbnail);
+  const excerpt = description ? extractExcerpt(description, 160) : '';
 
   return {
     title: title,
@@ -78,9 +82,16 @@ export default async function NewsDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const { title, description, publishedDate, author, thumbnail, publishedAt } = newsItem.attributes;
-  const imageUrl = getStrapiMediaUrl(thumbnail?.data?.attributes?.url);
-  const displayDate = publishedDate || publishedAt;
+  // Handle both Strapi v4 (attributes) and v5 (direct) structures
+  const data = newsItem.attributes || newsItem;
+  const { title, description, publishedDate, author, thumbnail, publishedAt, createdAt } = data;
+  
+  if (!title || !description) {
+    notFound();
+  }
+  
+  const imageUrl = getStrapiMediaUrl(thumbnail);
+  const displayDate = publishedDate || publishedAt || createdAt || '';
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -108,10 +119,10 @@ export default async function NewsDetailPage({ params }: PageProps) {
       </section>
 
       {/* Hero Banner */}
-      <section className="relative h-[400px] md:h-[500px] bg-gray-900 overflow-hidden">
+      <section className="relative h-[400px] md:h-[500px] bg-gray-900 overflow-hidden mt-16">
         <Image
           src={imageUrl}
-          alt={thumbnail?.data?.attributes?.alternativeText || title}
+          alt={thumbnail?.alternativeText || title || 'News image'}
           fill
           priority
           className="object-cover"
@@ -124,12 +135,14 @@ export default async function NewsDetailPage({ params }: PageProps) {
             <div className="max-w-4xl">
               {/* Meta */}
               <div className="flex flex-wrap items-center gap-4 mb-4 text-sm">
-                <div className="flex items-center gap-2 text-orange-200 bg-white/10 backdrop-blur-sm px-3 py-1 rounded-full">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  <span className="font-medium">{formatDate(displayDate)}</span>
-                </div>
+                {displayDate && (
+                  <div className="flex items-center gap-2 text-orange-200 bg-white/10 backdrop-blur-sm px-3 py-1 rounded-full">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span className="font-medium">{formatDate(displayDate)}</span>
+                  </div>
+                )}
                 {author && (
                   <div className="flex items-center gap-2 text-orange-200 bg-white/10 backdrop-blur-sm px-3 py-1 rounded-full">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -20,19 +20,37 @@ export const metadata: Metadata = {
 async function getEvents() {
   try {
     const response = await fetchAPI<StrapiResponse<EventAttributes>>('/events', {
-      next: { revalidate: 60 },
+      cache: 'no-store',
     });
     
-    // Sort by eventDate
-    const sortedEvents = response.data.sort((a, b) => {
-      const dateA = new Date(a.attributes.eventDate);
-      const dateB = new Date(b.attributes.eventDate);
+    if (!response.data || !Array.isArray(response.data)) {
+      return { upcoming: [], past: [] };
+    }
+    
+    // Filter valid events and sort by eventDate
+    const validEvents = response.data
+      .filter(item => {
+        const data = item.attributes || item;
+        return data && data.title && data.eventDate;
+      });
+    
+    const sortedEvents = validEvents.sort((a, b) => {
+      const aData = a.attributes || a;
+      const bData = b.attributes || b;
+      const dateA = new Date(aData.eventDate || 0);
+      const dateB = new Date(bData.eventDate || 0);
       return dateA.getTime() - dateB.getTime();
     });
     
     // Separate upcoming and past events
-    const upcoming = sortedEvents.filter(event => isUpcoming(event.attributes.eventDate));
-    const past = sortedEvents.filter(event => !isUpcoming(event.attributes.eventDate)).reverse();
+    const upcoming = sortedEvents.filter(event => {
+      const data = event.attributes || event;
+      return data.eventDate && isUpcoming(data.eventDate);
+    });
+    const past = sortedEvents.filter(event => {
+      const data = event.attributes || event;
+      return data.eventDate && !isUpcoming(data.eventDate);
+    }).reverse();
     
     return { upcoming, past };
   } catch (error) {
@@ -49,7 +67,7 @@ export default async function EventsPage() {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#af5f36] to-[#8b4a28] py-24 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#af5f36] to-[#8b4a28] py-24 overflow-hidden mt-20">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
@@ -112,10 +130,15 @@ export default async function EventsPage() {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {upcoming.map((event) => {
-                const { title, description, eventDate, eventTime, location, banner } = event.attributes;
-                const imageUrl = getStrapiMediaUrl(banner?.data?.attributes?.url);
-                const excerpt = extractExcerpt(description, 100);
+                const data = event.attributes || event;
+                const { title, description, eventDate, eventTime, location, banner } = data;
+                
+                if (!title || !eventDate) return null;
+                
+                const imageUrl = getStrapiMediaUrl(banner);
+                const excerpt = description ? extractExcerpt(description, 100) : '';
                 const dateParts = getDateParts(eventDate);
+                const eventId = event.id || event.documentId;
 
                 return (
                   <Link
@@ -127,7 +150,7 @@ export default async function EventsPage() {
                     <div className="relative h-56 overflow-hidden bg-gray-200">
                       <Image
                         src={imageUrl}
-                        alt={banner?.data?.attributes?.alternativeText || title}
+                        alt={banner?.alternativeText || title || 'Event image'}
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -176,9 +199,11 @@ export default async function EventsPage() {
                       </div>
 
                       {/* Excerpt */}
-                      <p className="text-gray-600 mb-4 line-clamp-2 text-sm leading-relaxed">
-                        {excerpt}
-                      </p>
+                      {excerpt && (
+                        <p className="text-gray-600 mb-4 line-clamp-2 text-sm leading-relaxed">
+                          {excerpt}
+                        </p>
+                      )}
 
                       {/* View Details Link */}
                       <div className="flex items-center gap-2 text-[#af5f36] font-semibold text-sm group-hover:gap-3 transition-all">
@@ -216,10 +241,15 @@ export default async function EventsPage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {past.map((event) => {
-                const { title, description, eventDate, eventTime, location, banner } = event.attributes;
-                const imageUrl = getStrapiMediaUrl(banner?.data?.attributes?.url);
-                const excerpt = extractExcerpt(description, 100);
+                const data = event.attributes || event;
+                const { title, description, eventDate, eventTime, location, banner } = data;
+                
+                if (!title || !eventDate) return null;
+                
+                const imageUrl = getStrapiMediaUrl(banner);
+                const excerpt = description ? extractExcerpt(description, 100) : '';
                 const dateParts = getDateParts(eventDate);
+                const eventId = event.id || event.documentId;
 
                 return (
                   <Link
@@ -250,9 +280,11 @@ export default async function EventsPage() {
                           <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2">
                             {title}
                           </h3>
-                          <p className="text-gray-600 text-sm line-clamp-2">
-                            {excerpt}
-                          </p>
+                          {excerpt && (
+                            <p className="text-gray-600 text-sm line-clamp-2">
+                              {excerpt}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>

@@ -7,7 +7,7 @@ import { fetchAPI, getStrapiMediaUrl, extractExcerpt, StrapiResponse, EventAttri
 import { getDateParts, formatTime, isUpcoming } from '../../utils/formatDate';
 
 export default function UpcomingEventsSection() {
-  const [events, setEvents] = useState<Array<{ id: number; attributes: EventAttributes }>>([]);
+  const [events, setEvents] = useState<Array<any>>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,12 +15,23 @@ export default function UpcomingEventsSection() {
       try {
         const response = await fetchAPI<StrapiResponse<EventAttributes>>('/events');
         
+        if (!response.data || !Array.isArray(response.data)) {
+          setEvents([]);
+          setLoading(false);
+          return;
+        }
+        
         // Filter upcoming events, sort by date, and take latest 3
         const upcomingEvents = response.data
-          .filter(event => isUpcoming(event.attributes.eventDate))
+          .filter(event => {
+            const data = event.attributes || event;
+            return data && data.title && data.eventDate && isUpcoming(data.eventDate);
+          })
           .sort((a, b) => {
-            const dateA = new Date(a.attributes.eventDate);
-            const dateB = new Date(b.attributes.eventDate);
+            const aData = a.attributes || a;
+            const bData = b.attributes || b;
+            const dateA = new Date(aData.eventDate || 0);
+            const dateB = new Date(bData.eventDate || 0);
             return dateA.getTime() - dateB.getTime();
           })
           .slice(0, 3);
@@ -91,22 +102,27 @@ export default function UpcomingEventsSection() {
         {/* Events Grid */}
         <div className="grid md:grid-cols-3 gap-8 mb-10">
           {events.map((event) => {
-            const { title, description, eventDate, eventTime, location, banner } = event.attributes;
-            const imageUrl = getStrapiMediaUrl(banner?.data?.attributes?.url);
-            const excerpt = extractExcerpt(description, 80);
+            const data = event.attributes || event;
+            const { title, description, eventDate, eventTime, location, banner } = data;
+            
+            if (!title || !eventDate) return null;
+            
+            const imageUrl = getStrapiMediaUrl(banner);
+            const excerpt = description ? extractExcerpt(description, 80) : '';
             const dateParts = getDateParts(eventDate);
+            const eventId = (event as any).id || (event as any).documentId;
 
             return (
               <Link
-                key={event.id}
-                href={`/events/${event.id}`}
+                key={eventId}
+                href={`/events/${eventId}`}
                 className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-orange-200"
               >
                 {/* Event Image */}
                 <div className="relative h-48 overflow-hidden bg-gray-200">
                   <Image
                     src={imageUrl}
-                    alt={banner?.data?.attributes?.alternativeText || title}
+                    alt={banner?.alternativeText || title || 'Event image'}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, 33vw"
@@ -155,9 +171,11 @@ export default function UpcomingEventsSection() {
                   </div>
 
                   {/* Excerpt */}
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
-                    {excerpt}
-                  </p>
+                  {excerpt && (
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
+                      {excerpt}
+                    </p>
+                  )}
 
                   {/* View Details */}
                   <div className="flex items-center gap-2 text-[#af5f36] font-semibold text-sm group-hover:gap-3 transition-all">
