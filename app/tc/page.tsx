@@ -143,7 +143,7 @@ export default function TCPage() {
                     value={studentName}
                     onChange={(e) => setStudentName(e.target.value)}
                     placeholder="Enter student's full name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#af5f36] focus:border-transparent transition-all outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#af5f36] focus:border-transparent transition-all outline-none text-gray-900 placeholder:text-gray-500 bg-white"
                     required
                   />
                 </div>
@@ -161,7 +161,7 @@ export default function TCPage() {
                     id="dateOfBirth"
                     value={dateOfBirth}
                     onChange={(e) => setDateOfBirth(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#af5f36] focus:border-transparent transition-all outline-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#af5f36] focus:border-transparent transition-all outline-none text-gray-900 bg-white"
                     required
                   />
                 </div>
