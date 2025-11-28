@@ -77,7 +77,8 @@ export default function Header() {
       label: 'Information', 
       href: '/policies',
       dropdown: [
-        { label: 'Policies', href: '/policies' }
+        { label: 'Policies', href: '/policies' },
+        { label: 'Transfer Certificate', href: '/tc' }
       ]
     },
     { 
